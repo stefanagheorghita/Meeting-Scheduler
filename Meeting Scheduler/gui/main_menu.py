@@ -1,19 +1,28 @@
+import os
+
 import tkinter as tk
 from PIL import Image, ImageTk
 
-from gui.menu.button_handling import add_person, add_meeting, import_data, export_data
+from gui.menu.button_handling import add_meeting, import_data, export_data
+from gui.person import add_person
 
 background_image = None
-mod_img = None
+
+
+def get_image_path(image_name):
+    current_file_path = os.path.abspath(__file__)
+    path_parts = current_file_path.split(os.sep)
+    base_dir_index = path_parts.index("Meeting-Scheduler")
+    base_dir = os.sep.join(path_parts[:base_dir_index + 1])
+    path = os.path.join(base_dir, "images", image_name)
+    return path
 
 
 def background(root):
     global background_image
-    global mod_img
     width = root.winfo_screenwidth()
     height = root.winfo_screenheight()
-
-    photo = Image.open("../images/menu.gif")
+    photo = Image.open(get_image_path("menu.gif"))
     mod_img = photo.resize((width, height))
     background_image = ImageTk.PhotoImage(mod_img)
     background_label = tk.Label(root, image=background_image)
@@ -24,7 +33,7 @@ def buttons(root):
     frame = tk.Frame(root, bg="white", bd=5)
     frame.place(relx=0.5, rely=0.5, relwidth=0.6, relheight=0.6, anchor="center")
 
-    add_person_btn = tk.Button(frame, text="Add Person", command=add_person, bg="lightgreen", fg="black",
+    add_person_btn = tk.Button(frame, text="Add Person", command=lambda: add_person(root), bg="lightgreen", fg="black",
                                relief=tk.RAISED, font=("Arial", 12, "bold"))
     add_person_btn.pack(side=tk.TOP, padx=20, pady=10, fill=tk.X)
 
@@ -39,6 +48,11 @@ def buttons(root):
     export_btn = tk.Button(frame, text="Export", command=export_data, bg="lightcoral", fg="black",
                            relief=tk.RAISED, font=("Arial", 12, "bold"))
     export_btn.pack(side=tk.TOP, padx=20, pady=10, fill=tk.X)
+
+
+def redraw(root):
+    background(root)
+    buttons(root)
 
 
 def menu_window():
