@@ -22,6 +22,11 @@ def background(root):
 
 
 def show_input_labels(input_frame):
+    """
+    Shows the labels and entry fields for the user to input the person's data.
+    :param input_frame:
+    :return:
+    """
     label_id = tk.Label(input_frame, text="Id:", font=("Arial", 12))
     label_id.pack()
     entry_id = tk.Entry(input_frame, font=("Arial", 12))
@@ -39,6 +44,11 @@ def show_input_labels(input_frame):
 
 
 def add_person(root):
+    """
+    Constructs the add person window.
+    :param root:
+    :return:
+    """
     for widget in root.winfo_children():
         widget.pack_forget()
 
