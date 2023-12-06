@@ -10,7 +10,7 @@ background_image = None
 
 
 def get_image_path(image_name):
-    """Returns the absolute path of the background image with the given name.
+    """Returns the absolute path of the background image with the given name
     :param image_name: The name of the image.
     :return: The absolute path of the image.
     """
