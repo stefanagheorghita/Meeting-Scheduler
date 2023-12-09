@@ -47,6 +47,16 @@ def show_input_labels(input_frame):
 
 
 def different_formatting_case(id, first_name, last_name, formatted_first_name, formatted_last_name):
+    """
+    Shows the user the different formatting options for the name and asks him to choose the correct one
+    :param id: id of the person
+    :param first_name: first name introduced by the user
+    :param last_name: last name introduced by the user
+    :param formatted_first_name: formatted first name
+    :param formatted_last_name: formatted last name
+    :return:
+    """
+
     def add_now(id, first_name, last_name):
         result, msg = add_person_confirmation(id, first_name, last_name)
         if result:
@@ -104,7 +114,11 @@ def different_formatting_case(id, first_name, last_name, formatted_first_name, f
 
 def save_person(entry_id, entry_first_name, entry_last_name):
     """
-    Sends the data to the validation function and to be added to the database and shows the if the operation was successful or not.
+    Sends the data to the validation function and to be added to the database and shows the if the operation
+    was successful or not.
+    :param entry_id:
+    :param entry_first_name:
+    :param entry_last_name:
     :return:
     """
     id = entry_id.get()
