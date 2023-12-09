@@ -1,7 +1,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 from tkinter import messagebox
-from validation.person_validation import add_person_validation
+from validation.person_validation import add_person_validation, add_person_confirmation
 
 background_image = None
 
@@ -46,6 +46,62 @@ def show_input_labels(input_frame):
     return entry_id, entry_first_name, entry_last_name
 
 
+def different_formatting_case(id, first_name, last_name, formatted_first_name, formatted_last_name):
+    def add_now(id, first_name, last_name):
+        result, msg = add_person_confirmation(id, first_name, last_name)
+        if result:
+            messagebox.showinfo("Success", "Person successfully added to the database!")
+        else:
+            messagebox.showerror("Error", msg)
+        window.destroy()
+
+    window = tk.Toplevel()
+    window.title("Name Confirmation")
+    window.geometry("350x200")
+    window.configure(bg="#e1f5fe")
+
+    label = tk.Label(window, text="The name didn't have the expected format.", font=("Arial", 12), bg="#e1f5fe",
+                     fg="#333")
+    label.pack(pady=10)
+
+    explanation = tk.Label(window, text="Please choose the correct variant:",
+                           font=("Arial", 10), bg="#e1f5fe", fg="#333")
+    explanation.pack(padx=5, pady=5, ipadx=5, ipady=5)
+    parts = first_name.split()
+    name = ""
+    for i in range(len(parts)):
+        if parts[i].isalpha() and (i + 1 < len(parts) and parts[i + 1].isalpha()):
+            name += parts[i] + " "
+        else:
+            name += parts[i]
+    first_name = name
+
+    parts = last_name.split()
+    name = ""
+    for i in range(len(parts)):
+        if parts[i].isalpha() and (i + 1 < len(parts) and parts[i + 1].isalpha()):
+            name += parts[i] + " "
+        else:
+            name += parts[i]
+    last_name = name
+    if formatted_first_name[1:] == first_name[1:]:
+        first_name = formatted_first_name
+    if formatted_last_name[1:] == last_name[1:]:
+        last_name = formatted_last_name
+    choices = [(formatted_first_name, last_name[0].upper() + last_name[1:]),
+               (first_name[0].upper() + first_name[1:], formatted_last_name),
+               (formatted_first_name, formatted_last_name),
+               (first_name[0].upper() + first_name[1:], last_name[0].upper() + last_name[1:])]
+    choices = list(set(choices))
+
+    for choice in choices:
+        btn = tk.Button(window, text=choice[0] + " " + choice[1], font=("Arial", 10), bg="#b3e5fc", fg="#333",
+                        activebackground="#81d4fa",
+                        activeforeground="#222",
+                        command=lambda c=choice: add_now(id, c[0], c[1]))
+        btn.pack(pady=5, padx=20, ipadx=10)
+
+
 def save_person(entry_id, entry_first_name, entry_last_name):
     """
     Sends the data to the validation function and to be added to the database and shows the if the operation was successful or not.
@@ -56,10 +112,14 @@ def save_person(entry_id, entry_first_name, entry_last_name):
     last_name = entry_last_name.get()
     valid, message = add_person_validation(id, first_name, last_name)
     if valid:
-        if message is  None:
+        if message is None:
             messagebox.showinfo("Success", "Person successfully added to the database!")
         else:
-            messagebox.showinfo("Success", message)
+            if "!!" not in message:
+                messagebox.showinfo("Success", message)
+            else:
+                split_name = message.split("!!")
+                different_formatting_case(id, first_name, last_name, split_name[0], split_name[1])
         entry_id.delete(0, tk.END)
         entry_first_name.delete(0, tk.END)
         entry_last_name.delete(0, tk.END)

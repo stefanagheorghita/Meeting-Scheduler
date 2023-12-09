@@ -38,23 +38,24 @@ def validate_consecutive(name, sep):
     return True
 
 
-def validate_name(name):
+def validate_name(name, flag):
     """
     Validates the basic rules for a name. The name must contain only letters, spaces, dashes or apostrophes.
     :param name:
+    :param flag: "first" or "last"
     :return: (True, None) if the name is valid, (False, error message) otherwise.
     """
     name = name.strip()
     n_chr = [c for c in name if c.isalpha() or c == " " or c == "-" or c == "'"]
     name = name.strip()
     if name.startswith("-") or name.endswith("-") or name.startswith("'") or name.endswith("'"):
-        return False, "Invalid format for first name!"
+        return False, f"Invalid format for {flag} name!"
     if len(n_chr) != len(name):
-        return False, "First name must contain only letters!"
+        return False, f"{flag[0].upper()+flag[1:]} name must contain only letters!"
     if not validate_consecutive(name, "-"):
-        return False, "Invalid format for first name!"
+        return False, f"Invalid format for {flag} name!"
     if not validate_consecutive(name, "'"):
-        return False, "Invalid format for first name!"
+        return False, f"Invalid format for {flag} name!"
     return True, None
 
 
@@ -73,18 +74,38 @@ def add_person_validation(id, first_name, last_name):
         return False, "Id must be a number!"
     if int(id) <= 0 or int(id) > 2147483647:
         return False, "The id is not within the limits!"
-    result, msg = validate_name(first_name)
-    if not result:
-        return False, msg
+    result, msg = validate_name(first_name, "first")
+    result2, msg2 = validate_name(last_name, "last")
+    if not result or not result2:
+        if msg is not None:
+            return False, msg
+        else:
+            return False, msg2
     db_manager = DatabaseManager()
     id = int(id)
     if not db_manager.search_id_db(id):
         return False, "There is already a person in the database with the given id!"
+    first_name = first_name.strip()
+    last_name = last_name.strip()
     first_name_formatted = format_name(first_name)
     last_name_formatted = format_name(last_name)
-    if first_name_formatted != first_name or last_name_formatted != last_name:
-        message = "The person was added to the database with the following name: "
-        message += first_name_formatted + " " + last_name_formatted
+    if first_name_formatted[1:] != first_name[1:] or last_name_formatted[1:] != last_name[1:]:
+        message = first_name_formatted + "!!" + last_name_formatted
+    else:
+        if first_name_formatted[0] != first_name[0] or last_name_formatted[0] != last_name[0]:
+            message = "The person was added to the database as " + first_name_formatted + " " + last_name_formatted + \
+                      "!"
+        first_name = first_name_formatted
+        last_name = last_name_formatted
+    if message is None:
+        if not db_manager.add_person(id, first_name, last_name):
+            return False, "An error occurred while adding the person to the database!"
+    return True, message
+
+
+def add_person_confirmation(id, first_name, last_name):
+    db_manager = DatabaseManager()
+    id = int(id)
     if not db_manager.add_person(id, first_name, last_name):
         return False, "An error occurred while adding the person to the database!"
-    return True, message
+    return True, None
