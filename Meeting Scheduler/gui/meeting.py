@@ -1,7 +1,9 @@
 import tkinter as tk
 from PIL import Image, ImageTk
-from tkinter import messagebox, ttk
+from tkinter import ttk
 from tkcalendar import DateEntry
+
+from validation.meeting_validation import validate_meeting_data
 
 background_image = None
 
@@ -22,8 +24,25 @@ def background(root):
     background_label.place(relx=0.5, rely=0.5, relheight=1, relwidth=1, anchor="center")
 
 
-def disable_edit(event):
-    return "break"
+def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_combo, end_hour_combo, end_minute_combo):
+    """
+    Gets the data from the fields of the add meeting screen
+    :param start_date_entry: Entry field for the start date
+    :param end_date_entry: Entry field for the end date
+    :param start_hour_combo: Combobox for the start hour
+    :param start_minute_combo: Combobox for the start minute
+    :param end_hour_combo: Combobox for the end hour
+    :param end_minute_combo: Combobox for the end minute
+    :return:
+    """
+    start_date = start_date_entry.get_date()
+    end_date = end_date_entry.get_date()
+    start_hour = start_hour_combo.get()
+    start_minute = start_minute_combo.get()
+    end_hour = end_hour_combo.get()
+    end_minute = end_minute_combo.get()
+    result, msg = validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute)
+    print(result, msg)
 
 
 def add_meeting_screen(root):
@@ -51,11 +70,19 @@ def add_meeting_screen(root):
     meeting_frame = tk.Frame(root, bg="white", borderwidth=1, relief="solid")
     meeting_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.7, relheight=0.5)
 
-    date_label = ttk.Label(meeting_frame, text="Date:", background="white", font=("Arial", 12), borderwidth=1,
+    start_date_label = ttk.Label(meeting_frame, text=" Start Date:", background="white", font=("Arial", 12),
+                                 borderwidth=1, relief="solid")
+    start_date_label.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    start_date_entry = DateEntry(meeting_frame, font=("Arial", 12), background='darkblue', foreground='white',
+                                 borderwidth=2)
+    start_date_entry.grid(row=0, column=1, padx=10, pady=5)
+    start_date_entry.bind("<Key>", disable_edit)
+
+    date_label = ttk.Label(meeting_frame, text="End Date:", background="white", font=("Arial", 12), borderwidth=1,
                            relief="solid")
-    date_label.grid(row=0, column=0, padx=10, pady=5, sticky="w")
+    date_label.grid(row=1, column=0, padx=10, pady=5, sticky="w")
     date_entry = DateEntry(meeting_frame, font=("Arial", 12), background='darkblue', foreground='white', borderwidth=2)
-    date_entry.grid(row=0, column=1, padx=10, pady=5)
+    date_entry.grid(row=1, column=1, padx=10, pady=5)
     date_entry.bind("<Key>", disable_edit)
 
     hours = [str(i).zfill(2) for i in range(24)]
@@ -63,37 +90,40 @@ def add_meeting_screen(root):
 
     start_time_label = ttk.Label(meeting_frame, text="Start Time:", background="white", font=("Arial", 12),
                                  borderwidth=1, relief="solid")
-    start_time_label.grid(row=1, column=0, padx=10, pady=5, sticky="e")
+    start_time_label.grid(row=2, column=0, padx=10, pady=5, sticky="e")
 
     start_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=("Arial", 12), width=5, state='readonly')
-    start_hour_combo.grid(row=1, column=1, padx=5, pady=5)
+    start_hour_combo.grid(row=2, column=1, padx=5, pady=5)
     start_hour_combo.set("00")
 
     start_minute_label = ttk.Label(meeting_frame, text=":", background="white", font=("Arial", 12))
-    start_minute_label.grid(row=1, column=2, padx=5, pady=5)
+    start_minute_label.grid(row=2, column=2, padx=5, pady=5)
 
     start_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=("Arial", 12), width=5, state='readonly')
-    start_minute_combo.grid(row=1, column=3, padx=5, pady=5)
+    start_minute_combo.grid(row=2, column=3, padx=5, pady=5)
     start_minute_combo.set("00")
 
     end_time_label = ttk.Label(meeting_frame, text="End Time:", background="white", font=("Arial", 12), borderwidth=1,
                                relief="solid")
-    end_time_label.grid(row=2, column=0, padx=10, pady=5, sticky="e")
+    end_time_label.grid(row=3, column=0, padx=10, pady=5, sticky="e")
 
     end_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=("Arial", 12), width=5, state='readonly')
-    end_hour_combo.grid(row=2, column=1, padx=5, pady=5)
+    end_hour_combo.grid(row=3, column=1, padx=5, pady=5)
     end_hour_combo.set("00")
 
     end_minute_label = ttk.Label(meeting_frame, text=":", background="white", font=("Arial", 12))
-    end_minute_label.grid(row=2, column=2, padx=5, pady=5)
+    end_minute_label.grid(row=3, column=2, padx=5, pady=5)
 
     end_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=("Arial", 12), width=5, state='readonly')
-    end_minute_combo.grid(row=2, column=3, padx=5, pady=5)
+    end_minute_combo.grid(row=3, column=3, padx=5, pady=5)
     end_minute_combo.set("00")
 
-    save_button = ttk.Button(meeting_frame, text="Save Meeting", command=open_choose_participants,
+    save_button = ttk.Button(meeting_frame, text="Add participants",
+                             command=lambda: get_data(start_date_entry, date_entry, start_hour_combo,
+                                                      start_minute_combo, end_hour_combo,
+                                                      end_minute_combo),
                              style='EntireGreen.TButton')
-    save_button.grid(row=4, columnspan=3, pady=20)
+    save_button.grid(row=5, columnspan=3, pady=20)
 
     style = ttk.Style()
     style.theme_use("alt")
@@ -101,11 +131,11 @@ def add_meeting_screen(root):
     style.map("TButton", background=[("active", "purple")])
 
 
-participants = [
-    "Participant 1",
-    "Participant 2",
-    "Participant 3",
-]
+def disable_edit(event):
+    return "break"
+
+
+participants = ["John Doe", "Jane Doe", "John Smith", "Jane Smith", "John Johnson", "Jane Johnson"]
 
 
 def open_choose_participants():
