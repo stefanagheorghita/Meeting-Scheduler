@@ -3,7 +3,7 @@ from database.manager import DatabaseManager
 
 def format_name(name):
     """
-    It formats the name to have the first letter of each word capitalized.
+    It formats the name to have the first letter of each word capitalized
     :param name: name to be formatted
     :return: formatted name
     """
@@ -26,7 +26,7 @@ def format_name(name):
 
 def validate_consecutive(name, sep):
     """
-    Validates that the name doesn't contain consecutive separators.
+    Validates that the name doesn't contain consecutive separators
     :param name: name to be validated
     :param sep: separator
     :return: True if the name is valid, False otherwise.
@@ -40,7 +40,7 @@ def validate_consecutive(name, sep):
 
 def validate_name(name, flag):
     """
-    Validates the basic rules for a name. The name must contain only letters, spaces, dashes or apostrophes.
+    Validates the basic rules for a name. The name must contain only letters, spaces, dashes or apostrophes
     :param name: name to be validated
     :param flag: "first" or "last"
     :return: (True, None) if the name is valid, (False, error message) otherwise.
@@ -105,7 +105,7 @@ def add_person_validation(id, first_name, last_name):
 
 def add_person_confirmation(id, first_name, last_name):
     """
-    Adds the person to the database, for the case where the user is asked which format is correct.
+    Adds the person to the database, for the case where the user is asked which format is correct
     :param id: id of the person
     :param first_name: First name of the person
     :param last_name: Last name of the person
