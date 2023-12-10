@@ -26,7 +26,8 @@ def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_ho
             return False, "You can't add a meeting that starts in the past!"
         elif diff < 60:
             return False, "You can't add a meeting that starts in less than an hour!"
-
+    diff_hours = end_hour - start_hour
+    diff_time = diff_hours * 60 + end_minute - start_minute
     if start_date > end_date:
         return False, "The start date must be before the end date!"
     if start_date == end_date:
@@ -37,7 +38,7 @@ def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_ho
                 return False, "The start minute must be before the end minute!"
             elif end_minute - start_minute < 10:
                 return False, "The meeting must last at least 10 minutes!"
-        elif end_hour - start_hour > 3:
+        elif diff_time > 3 * 60:
             return False, "The meeting lasts too long!"
     elif (end_date - start_date).days > 1:
         return False, "The meeting lasts too long!"
