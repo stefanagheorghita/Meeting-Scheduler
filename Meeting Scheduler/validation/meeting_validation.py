@@ -1,6 +1,18 @@
 from datetime import timedelta, datetime
 
 
+def validate_meeting_search(start_date, end_date, start_hour, start_minute, end_hour, end_minute):
+    if end_date < start_date:
+        return False, "The start date must be before the end date!"
+    elif end_date == start_date:
+        if end_hour < start_hour:
+            return False, "The start hour must be before the end hour!"
+        elif end_hour == start_hour:
+            if end_minute <= start_minute:
+                return False, "The start minute must be before the end minute!"
+    return True, None
+
+
 def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute):
     """
     Validates the fields of the meeting

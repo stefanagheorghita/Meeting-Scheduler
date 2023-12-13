@@ -1,8 +1,12 @@
 import tkinter as tk
-from tkinter import ttk
+from datetime import datetime, time
+from tkinter import ttk, messagebox
 
 from PIL import Image, ImageTk
 from tkcalendar import DateEntry
+
+from database.manager import DatabaseManager
+from validation.meeting_validation import validate_meeting_search
 
 background_image = None
 
@@ -11,10 +15,62 @@ def disable_edit(event):
     return "break"
 
 
+def show_search_results(rows, participants):
+    result_window = tk.Toplevel()
+    result_window.title("Meeting Search Results")
+
+    result_text = tk.Text(result_window, height=20, width=50)
+    result_text.tag_configure("bold", font=("Arial", 10, "bold"))
+    result_text.tag_configure("red", foreground="red")
+    result_text.tag_configure("green", foreground="green")
+    result_text.tag_configure("blue", foreground="blue")
+    result_text.pack()
+
+    for i in range(len(rows)):
+        result_text.insert(tk.END, "Meeting ID: ", "red")
+        result_text.insert(tk.END, f"{rows[i][0]}\n")
+        result_text.insert(tk.END, "Start time: ", "blue")
+        result_text.insert(tk.END, f"{rows[i][1]}\n")
+        result_text.insert(tk.END, "End time: ", "blue")
+        result_text.insert(tk.END, f"{rows[i][2]}\n")
+        result_text.insert(tk.END, "Participants:\n", "green")
+        for participant in participants[i]:
+            result_text.insert(tk.END, f"{participant[1]} {participant[2]}\n")
+    result_text.config(state=tk.DISABLED)
+    result_text.pack(fill="both", expand=True)
+
+
 def search(start_date_entry, end_date_entry, start_hour_combo,
            start_minute_combo, end_hour_combo,
            end_minute_combo):
-    pass
+    start_date = start_date_entry.get_date()
+    end_date = end_date_entry.get_date()
+    start_hour = start_hour_combo.get()
+    start_minute = start_minute_combo.get()
+    end_hour = end_hour_combo.get()
+    end_minute = end_minute_combo.get()
+    res, msg = validate_meeting_search(start_date, end_date, start_hour, start_minute, end_hour, end_minute)
+    db_manager = DatabaseManager()
+    start_time = datetime.combine(start_date, time(int(start_hour), int(start_minute)))
+    end_time = datetime.combine(end_date, time(int(end_hour), int(end_minute)))
+    all_participants = []
+    if res:
+        meetings = db_manager.search_meetings(start_time, end_time)
+        if meetings is None:
+            messagebox.showerror("Error", "An error occurred while searching for meetings!")
+        else:
+            if len(meetings) == 0:
+                messagebox.showinfo("Info", "No meetings were found!")
+                return
+            for meeting in meetings:
+                participants = db_manager.get_participants(meeting[0])
+                if participants is None:
+                    messagebox.showerror("Error", "An error occurred while searching for participants!")
+                    return
+                all_participants.append(participants)
+            show_search_results(meetings, all_participants)
+    else:
+        messagebox.showinfo("Info", "No meetings were found! The interval is invalid!")
 
 
 def background(root):
@@ -107,7 +163,7 @@ def search_meeting_screen(root):
     end_minute_combo.grid(row=3, column=3, padx=5, pady=5)
     end_minute_combo.set("00")
 
-    search_button = ttk.Button(meeting_frame, text="Add participants",
+    search_button = ttk.Button(meeting_frame, text="Search",
                                command=lambda: search(start_date_entry, date_entry, start_hour_combo,
                                                       start_minute_combo, end_hour_combo,
                                                       end_minute_combo),

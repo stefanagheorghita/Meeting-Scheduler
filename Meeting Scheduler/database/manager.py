@@ -135,3 +135,42 @@ class DatabaseManager:
         except psycopg2.Error as e:
             print("Error:", e)
             return False
+
+    def search_meetings(self, start_time, end_time):
+        """
+        Searches for meetings in the database that are in the specified interval
+        :param start_time: The start time of the meeting
+        :param end_time: The end time of the meeting
+        :return: A list of meetings that match the search criteria
+        """
+        try:
+            if not self.conn:
+                self.open_connection()
+            cursor = self.conn.cursor()
+            cursor.execute("SELECT * FROM meeting WHERE start_time >= %s AND end_time <= %s", (start_time, end_time))
+            rows = cursor.fetchall()
+            return rows
+        except psycopg2.Error as e:
+            print("Error:", e)
+            return None
+
+    def get_participants(self, meeting_id):
+        """
+        Gets the participants of a meeting
+        :param meeting_id: The id of the meeting
+        :return: A list of participants of the meeting
+        """
+        try:
+            if not self.conn:
+                self.open_connection()
+            cursor = self.conn.cursor()
+            cursor.execute("SELECT person_id FROM meeting_participants WHERE meeting_id = %s", (meeting_id,))
+            rows = cursor.fetchall()
+            participants = []
+            for row in rows:
+                cursor.execute("SELECT * FROM person WHERE id = %s", (row[0],))
+                participants.append(cursor.fetchone())
+            return participants
+        except psycopg2.Error as e:
+            print("Error:", e)
+            return None
