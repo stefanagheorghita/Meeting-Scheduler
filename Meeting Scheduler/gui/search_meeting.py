@@ -16,6 +16,12 @@ def disable_edit(event):
 
 
 def show_search_results(rows, participants):
+    """
+    Shows the search results in a new window
+    :param rows:
+    :param participants:
+    :return:
+    """
     result_window = tk.Toplevel()
     result_window.title("Meeting Search Results")
 
@@ -43,6 +49,16 @@ def show_search_results(rows, participants):
 def search(start_date_entry, end_date_entry, start_hour_combo,
            start_minute_combo, end_hour_combo,
            end_minute_combo):
+    """
+    Searches for meetings in the given interval
+    :param start_date_entry:
+    :param end_date_entry:
+    :param start_hour_combo:
+    :param start_minute_combo:
+    :param end_hour_combo:
+    :param end_minute_combo:
+    :return:
+    """
     start_date = start_date_entry.get_date()
     end_date = end_date_entry.get_date()
     start_hour = start_hour_combo.get()
