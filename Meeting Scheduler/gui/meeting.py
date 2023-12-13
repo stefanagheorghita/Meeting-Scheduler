@@ -1,11 +1,15 @@
 import tkinter as tk
+from datetime import datetime, time
+from tkinter import ttk, messagebox
+
 from PIL import Image, ImageTk
-from tkinter import ttk
 from tkcalendar import DateEntry
 
+from database.manager import DatabaseManager
 from validation.meeting_validation import validate_meeting_data
 
 background_image = None
+participant_window_open = False
 
 
 def background(root):
@@ -35,6 +39,7 @@ def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_co
     :param end_minute_combo: Combobox for the end minute
     :return:
     """
+    global participant_window_open
     start_date = start_date_entry.get_date()
     end_date = end_date_entry.get_date()
     start_hour = start_hour_combo.get()
@@ -43,6 +48,17 @@ def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_co
     end_minute = end_minute_combo.get()
     result, msg = validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute)
     print(result, msg)
+    if result and not participant_window_open:
+        start_hour_combo.set("00")
+        start_minute_combo.set("00")
+        end_hour_combo.set("00")
+        end_minute_combo.set("00")
+        participant_window_open = True
+        open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute)
+    elif result and participant_window_open:
+        pass
+    else:
+        messagebox.showerror("Error", msg)
 
 
 def add_meeting_screen(root):
@@ -74,14 +90,15 @@ def add_meeting_screen(root):
                                  borderwidth=1, relief="solid")
     start_date_label.grid(row=0, column=0, padx=10, pady=5, sticky="w")
     start_date_entry = DateEntry(meeting_frame, font=("Arial", 12), background='darkblue', foreground='white',
-                                 borderwidth=2)
+                                 borderwidth=2, date_pattern='dd/mm/yyyy')
     start_date_entry.grid(row=0, column=1, padx=10, pady=5)
     start_date_entry.bind("<Key>", disable_edit)
 
     date_label = ttk.Label(meeting_frame, text="End Date:", background="white", font=("Arial", 12), borderwidth=1,
                            relief="solid")
     date_label.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-    date_entry = DateEntry(meeting_frame, font=("Arial", 12), background='darkblue', foreground='white', borderwidth=2)
+    date_entry = DateEntry(meeting_frame, font=("Arial", 12), background='darkblue', foreground='white', borderwidth=2,
+                           date_pattern='dd/mm/yyyy')
     date_entry.grid(row=1, column=1, padx=10, pady=5)
     date_entry.bind("<Key>", disable_edit)
 
@@ -122,12 +139,12 @@ def add_meeting_screen(root):
                              command=lambda: get_data(start_date_entry, date_entry, start_hour_combo,
                                                       start_minute_combo, end_hour_combo,
                                                       end_minute_combo),
-                             style='EntireGreen.TButton')
+                             style='Button.TButton')
     save_button.grid(row=5, columnspan=3, pady=20)
 
     style = ttk.Style()
     style.theme_use("alt")
-    style.configure("EntireGreen.TButton", foreground="white", background="#66CC66", font=("Arial", 12))
+    style.configure("Button.TButton", foreground="white", background="#66CC66", font=("Arial", 12))
     style.map("TButton", background=[("active", "purple")])
 
 
@@ -135,17 +152,19 @@ def disable_edit(event):
     return "break"
 
 
-participants = ["John Doe", "Jane Doe", "John Smith", "Jane Smith", "John Johnson", "Jane Johnson"]
-
-
-def open_choose_participants():
+def open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute):
     """
     Opens the window where the user can select the participants of the meeting.
     :return:
     """
+
+    db_manager = DatabaseManager()
+    participants = db_manager.find_all_persons()
+    if participants is None:
+        messagebox.showerror("Error", "There was an error while retrieving the participants from the database!")
+
     participants_window = tk.Toplevel()
     participants_window.title("Select Participants")
-
     window_width = 400
     window_height = 400
     screen_width = participants_window.winfo_screenwidth()
@@ -157,14 +176,32 @@ def open_choose_participants():
     selected_participants = []
 
     def save_selected():
-        print(selected_participants)
+        global participant_window_open
+        if len(selected_participants) == 0:
+            messagebox.showerror("Error", "You must select at least one participant!")
+            return
         participants_window.destroy()
+        participant_window_open = False
+        send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants)
 
-    participants_frame = tk.Frame(participants_window)
-    participants_frame.place(relx=0.5, rely=0.2, anchor=tk.CENTER)
+    save_button = tk.Button(participants_window, text="Save", command=save_selected)
+    save_button.pack(side=tk.BOTTOM, anchor="nw", fill=tk.X)
+
+    participants_canvas = tk.Canvas(participants_window)
+    participants_frame = tk.Frame(participants_canvas)
+
+    scrollbar = tk.Scrollbar(participants_window, orient="vertical", command=participants_canvas.yview)
+    scrollbar.pack(side="right", fill="y")
+
+    participants_canvas.pack(side="left", fill="y", expand=True)
+    participants_canvas.create_window((0, 0), window=participants_frame, anchor="nw")
+
+    participants_frame.bind("<Configure>",
+                            lambda e: participants_canvas.configure(scrollregion=participants_canvas.bbox("all")))
+
+    participants_canvas.configure(yscrollcommand=scrollbar.set)
 
     checkbox_vars = []
-
     for participant in participants:
         var = tk.BooleanVar()
         var.set(False)
@@ -176,9 +213,34 @@ def open_choose_participants():
             elif not var.get() and participant in selected_participants:
                 selected_participants.remove(participant)
 
-        checkbox = tk.Checkbutton(participants_frame, text=participant, variable=var,
+        text = f"{participant[0]} - {participant[1]} {participant[2]}"
+        checkbox = tk.Checkbutton(participants_frame, text=text, variable=var,
                                   command=on_checkbox_click, font=("Arial", 12))
         checkbox.pack(anchor=tk.W)
 
-    save_button = tk.Button(participants_window, text="Save", command=save_selected)
-    save_button.pack()
+
+def send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants):
+    """
+    Sends the data to the database
+    :param start_date:
+    :param end_date:
+    :param start_hour:
+    :param start_minute:
+    :param end_hour:
+    :param end_minute:
+    :param selected_participants:
+    :return:
+    """
+    db_manager = DatabaseManager()
+    start_hour = int(start_hour)
+    start_minute = int(start_minute)
+    end_hour = int(end_hour)
+    end_minute = int(end_minute)
+    start_time = datetime.combine(start_date, time(start_hour, start_minute))
+    end_time = datetime.combine(end_date, time(end_hour, end_minute))
+
+    result = db_manager.add_meeting(start_time, end_time, selected_participants)
+    if result:
+        messagebox.showinfo("Success", "Meeting successfully added to the database!")
+    else:
+        messagebox.showerror("Error", "There was an error while adding the meeting to the database!")
