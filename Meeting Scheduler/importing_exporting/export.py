@@ -6,6 +6,12 @@ from database.manager import DatabaseManager
 
 
 def export(all_meetings, meetings=None):
+    """
+    Exports the meetings to a .ics file
+    :param all_meetings: True if all meetings should be exported, False if only the given meetings should be exported
+    :param meetings: the meetings to be exported, None if all meetings should be exported
+    :return:
+    """
     cal = Calendar()
     db_manager = DatabaseManager()
     if all_meetings:
