@@ -4,9 +4,10 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 from gui.meeting import add_meeting_screen
-from gui.search_meeting import search_meeting_screen
-from gui.menu.button_handling import import_data, export_data
+from gui.menu.button_handling import import_data
 from gui.person import add_person
+from gui.search_meeting import search_meeting_screen
+from importing_exporting.export import export
 
 background_image = None
 
@@ -57,7 +58,8 @@ def buttons(root):
                                 relief=tk.RAISED, font=("Arial", 12, "bold"))
     add_meeting_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
 
-    show_meetings_btn = tk.Button(frame, text="Show Meetings", command=lambda: search_meeting_screen(root), bg="#FFFF99",
+    show_meetings_btn = tk.Button(frame, text="Show Meetings", command=lambda: search_meeting_screen(root),
+                                  bg="#FFFF99",
                                   fg="black",
                                   relief=tk.RAISED, font=("Arial", 12, "bold"))
     show_meetings_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
@@ -66,7 +68,7 @@ def buttons(root):
                            relief=tk.RAISED, font=("Arial", 12, "bold"))
     import_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
 
-    export_btn = tk.Button(frame, text="Export", command=export_data, bg="lightcoral", fg="black",
+    export_btn = tk.Button(frame, text="Export", command=lambda: export(True), bg="lightcoral", fg="black",
                            relief=tk.RAISED, font=("Arial", 12, "bold"))
     export_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
 

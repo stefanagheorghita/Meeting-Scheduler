@@ -174,3 +174,22 @@ class DatabaseManager:
         except psycopg2.Error as e:
             print("Error:", e)
             return None
+
+    def get_all_meetings_with_participants(self):
+        """
+        Gets all the meetings from the database
+        :return: A list of all the meetings from the database
+        """
+        try:
+            if not self.conn:
+                self.open_connection()
+            cursor = self.conn.cursor()
+            cursor.execute("SELECT * FROM meeting")
+            rows = cursor.fetchall()
+            for i in range(len(rows)):
+                participants = self.get_participants(rows[i][0])
+                rows[i] = (rows[i], participants)
+            return rows
+        except psycopg2.Error as e:
+            print("Error:", e)
+            return None

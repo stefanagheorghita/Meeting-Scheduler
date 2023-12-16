@@ -8,6 +8,8 @@ from tkcalendar import DateEntry
 from database.manager import DatabaseManager
 from validation.meeting_validation import validate_meeting_search
 
+from importing_exporting.export import export
+
 background_image = None
 
 
@@ -32,6 +34,7 @@ def show_search_results(rows, participants):
     result_text.tag_configure("blue", foreground="blue")
     result_text.pack()
 
+    meetings = []
     for i in range(len(rows)):
         result_text.insert(tk.END, "Meeting ID: ", "red")
         result_text.insert(tk.END, f"{rows[i][0]}\n")
@@ -42,8 +45,13 @@ def show_search_results(rows, participants):
         result_text.insert(tk.END, "Participants:\n", "green")
         for participant in participants[i]:
             result_text.insert(tk.END, f"{participant[1]} {participant[2]}\n")
+        meetings.append((rows[i][0], rows[i][1], rows[i][2], participants[i]))
     result_text.config(state=tk.DISABLED)
     result_text.pack(fill="both", expand=True)
+
+    export_button = tk.Button(result_window, text="Export", command=lambda: export(False,meetings), bg="#FF9999", fg="white",
+                              font=("Arial", 12, "bold"))
+    export_button.pack()
 
 
 def search(start_date_entry, end_date_entry, start_hour_combo,
