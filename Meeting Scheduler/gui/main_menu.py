@@ -64,7 +64,7 @@ def buttons(root):
     show_meetings_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
 
     import_btn = tk.Button(frame, text="Import", command=lambda: import_calendar(
-        "calendar_all_meetings_820c099348f84a69b4d505b231d86dcb.ics"), bg="lightblue", fg="black",
+        "lalals"), bg="lightblue", fg="black",
                            relief=tk.RAISED, font=("Arial", 12, "bold"))
     import_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
 

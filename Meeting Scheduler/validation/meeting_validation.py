@@ -13,7 +13,7 @@ def validate_meeting_search(start_date, end_date, start_hour, start_minute, end_
     return True, None
 
 
-def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute):
+def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name):
     """
     Validates the fields of the meeting
     :param start_date:
@@ -22,6 +22,7 @@ def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_ho
     :param start_minute:
     :param end_hour:
     :param end_minute:
+    :param name:
     :return: (True, None) if the fields are valid, (False, error message) otherwise.
     """
     start_hour = int(start_hour)
@@ -29,6 +30,8 @@ def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_ho
     end_hour = int(end_hour)
     end_minute = int(end_minute)
     current_time = datetime.now()
+    if name == "":
+        return False, "Please introduce a name for the meeting!"
     if start_date < current_time.date():
         return False, "The start date must be after the current date!"
     elif start_date == current_time.date():

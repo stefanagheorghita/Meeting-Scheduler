@@ -28,7 +28,8 @@ def background(root):
     background_label.place(relx=0.5, rely=0.5, relheight=1, relwidth=1, anchor="center")
 
 
-def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_combo, end_hour_combo, end_minute_combo):
+def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_combo, end_hour_combo, end_minute_combo,
+             name_entry):
     """
     Gets the data from the fields of the add meeting screen
     :param start_date_entry: Entry field for the start date
@@ -37,6 +38,7 @@ def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_co
     :param start_minute_combo: Combobox for the start minute
     :param end_hour_combo: Combobox for the end hour
     :param end_minute_combo: Combobox for the end minute
+    :param name_entry: Entry field for the name of the meeting
     :return:
     """
     global participant_window_open
@@ -46,15 +48,17 @@ def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_co
     start_minute = start_minute_combo.get()
     end_hour = end_hour_combo.get()
     end_minute = end_minute_combo.get()
-    result, msg = validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute)
+    name = name_entry.get()
+    result, msg = validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name)
     print(result, msg)
     if result and not participant_window_open:
+        name_entry.delete(0, tk.END)
         start_hour_combo.set("00")
         start_minute_combo.set("00")
         end_hour_combo.set("00")
         end_minute_combo.set("00")
         participant_window_open = True
-        open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute)
+        open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name)
     elif result and participant_window_open:
         pass
     else:
@@ -84,7 +88,7 @@ def add_meeting_screen(root):
     back_button.pack(fill="both", expand=True, padx=1, pady=1)
 
     meeting_frame = tk.Frame(root, bg="white", borderwidth=1, relief="solid")
-    meeting_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.7, relheight=0.5)
+    meeting_frame.place(relx=0.5, rely=0.5, anchor="center", relwidth=0.8, relheight=0.6)
 
     start_date_label = ttk.Label(meeting_frame, text=" Start Date:", background="white", font=("Arial", 12),
                                  borderwidth=1, relief="solid")
@@ -117,7 +121,7 @@ def add_meeting_screen(root):
     start_minute_label.grid(row=2, column=2, padx=5, pady=5)
 
     start_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=("Arial", 12), width=5, state='readonly')
-    start_minute_combo.grid(row=2, column=3, padx=5, pady=5)
+    start_minute_combo.grid(row=2, column=3, padx=30, pady=5)
     start_minute_combo.set("00")
 
     end_time_label = ttk.Label(meeting_frame, text="End Time:", background="white", font=("Arial", 12), borderwidth=1,
@@ -132,15 +136,22 @@ def add_meeting_screen(root):
     end_minute_label.grid(row=3, column=2, padx=5, pady=5)
 
     end_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=("Arial", 12), width=5, state='readonly')
-    end_minute_combo.grid(row=3, column=3, padx=5, pady=5)
+    end_minute_combo.grid(row=3, column=3, padx=30, pady=5)
     end_minute_combo.set("00")
+
+    name_label = ttk.Label(meeting_frame, text="Meeting Name:", background="white", font=("Arial", 12),
+                           borderwidth=1, relief="solid")
+    name_label.grid(row=4, column=0, padx=3, pady=5, sticky="w")
+
+    name_entry = ttk.Entry(meeting_frame, font=("Arial", 12), width=15)
+    name_entry.grid(row=4, column=1, padx=5, pady=5)
 
     save_button = ttk.Button(meeting_frame, text="Add participants",
                              command=lambda: get_data(start_date_entry, date_entry, start_hour_combo,
                                                       start_minute_combo, end_hour_combo,
-                                                      end_minute_combo),
+                                                      end_minute_combo, name_entry),
                              style='Button.TButton')
-    save_button.grid(row=5, columnspan=3, pady=20)
+    save_button.grid(row=6, columnspan=3, pady=20)
 
     style = ttk.Style()
     style.theme_use("alt")
@@ -152,9 +163,16 @@ def disable_edit(event):
     return "break"
 
 
-def open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute):
+def open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name):
     """
-    Opens the window where the user can select the participants of the meeting.
+    Opens the window where the user can select the participants of the meeting
+    :param start_date:
+    :param end_date:
+    :param start_hour:
+    :param start_minute:
+    :param end_hour:
+    :param end_minute:
+    :param name:
     :return:
     """
 
@@ -182,7 +200,7 @@ def open_choose_participants(start_date, end_date, start_hour, start_minute, end
             return
         participants_window.destroy()
         participant_window_open = False
-        send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants)
+        send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants, name)
 
     save_button = tk.Button(participants_window, text="Save", command=save_selected)
     save_button.pack(side=tk.BOTTOM, anchor="nw", fill=tk.X)
@@ -219,7 +237,7 @@ def open_choose_participants(start_date, end_date, start_hour, start_minute, end
         checkbox.pack(anchor=tk.W)
 
 
-def send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants):
+def send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants, name):
     """
     Sends the data to the database
     :param start_date:
@@ -229,6 +247,7 @@ def send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minu
     :param end_hour:
     :param end_minute:
     :param selected_participants:
+    :param name:
     :return:
     """
     db_manager = DatabaseManager()
@@ -239,7 +258,7 @@ def send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minu
     start_time = datetime.combine(start_date, time(start_hour, start_minute))
     end_time = datetime.combine(end_date, time(end_hour, end_minute))
 
-    result = db_manager.add_meeting(start_time, end_time, selected_participants)
+    result = db_manager.add_meeting(start_time, end_time, selected_participants, name)
     if result:
         messagebox.showinfo("Success", "Meeting successfully added to the database!")
     else:

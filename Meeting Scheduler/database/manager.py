@@ -91,19 +91,20 @@ class DatabaseManager:
             print("Error:", e)
             return None
 
-    def add_meeting(self, start_time, end_time, participants):
+    def add_meeting(self, start_time, end_time, participants, name):
         """
         Adds a meeting to the database
         :param start_time: The start time of the meeting
         :param end_time: The end time of the meeting
         :param participants: The participants of the meeting
+        :param name: The name of the meeting
         """
         try:
             if not self.conn:
                 self.open_connection()
             cursor = self.conn.cursor()
-            cursor.execute("INSERT INTO meeting (start_time, end_time) VALUES (%s, %s)",
-                           (start_time, end_time))
+            cursor.execute("INSERT INTO meeting (start_time, end_time, name) VALUES (%s, %s, %s)",
+                           (start_time, end_time, name))
             self.conn.commit()
             cursor.execute("SELECT * FROM meeting ORDER BY ID DESC LIMIT 1")
             meeting_id = cursor.fetchone()[0]
