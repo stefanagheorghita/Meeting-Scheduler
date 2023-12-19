@@ -1,5 +1,6 @@
 import os
 import tkinter as tk
+from tkinter import filedialog, messagebox
 
 from PIL import Image, ImageTk
 
@@ -63,14 +64,28 @@ def buttons(root):
                                   relief=tk.RAISED, font=("Arial", 12, "bold"))
     show_meetings_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
 
-    import_btn = tk.Button(frame, text="Import", command=lambda: import_calendar(
-        "lalals"), bg="lightblue", fg="black",
+    import_btn = tk.Button(frame, text="Import", command=lambda: import_window(root), bg="lightblue", fg="black",
                            relief=tk.RAISED, font=("Arial", 12, "bold"))
     import_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
 
     export_btn = tk.Button(frame, text="Export", command=lambda: export(True), bg="lightcoral", fg="black",
                            relief=tk.RAISED, font=("Arial", 12, "bold"))
     export_btn.pack(side=tk.TOP, padx=20, pady=10, fill="both")
+
+
+def import_window(root):
+    file_path = filedialog.askopenfilename(title="Select File",
+                                           filetypes=(("ICS files", "*.ics"),))
+    if file_path:
+        print("Selected file:", file_path)
+        res, msg = import_events(file_path)
+        print(res, msg)
+        if res:
+            messagebox.showinfo("Success", "Import successful!")
+        else:
+            messagebox.showerror("Error", msg)
+    else:
+        print("No file selected.")
 
 
 def redraw(root):

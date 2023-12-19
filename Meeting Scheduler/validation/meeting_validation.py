@@ -53,7 +53,7 @@ def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_ho
                 return False, "The start minute must be before the end minute!"
             elif end_minute - start_minute < 10:
                 return False, "The meeting must last at least 10 minutes!"
-        elif diff_time > 3 * 60:
+        elif diff_time > 5 * 60:
             return False, "The meeting lasts too long!"
     elif (end_date - start_date).days > 1:
         return False, "The meeting lasts too long!"
@@ -62,6 +62,6 @@ def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_ho
         diff_time = diff_hours * 60 + end_minute - start_minute
         if diff_time < 10:
             return False, "The meeting must last at least 10 minutes!"
-        elif diff_time > 3 * 60:
+        elif diff_time > 5 * 60:
             return False, "The meeting lasts too long!"
     return True, None

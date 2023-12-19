@@ -40,7 +40,7 @@ def export(all_meetings, meetings=None):
             event.add("DESCRIPTION", participants_info)
             for participant in meeting[1]:
                 full_name = f"{participant[1]} {participant[2]}"
-                event.add("ATTENDEE", f"CN={full_name}")
+                event.add("ATTENDEE", f"CN={full_name};X-ID={participant[0]}")
             cal.add_component(event)
     else:
         if meetings is not None:

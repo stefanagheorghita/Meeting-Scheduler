@@ -110,6 +110,7 @@ class DatabaseManager:
             meeting_id = cursor.fetchone()[0]
             res = self.add_participants_to_meeting(meeting_id, participants)
             if not res:
+                print("Error while adding participants to meeting")
                 return False
             return True
         except psycopg2.Error as e:
@@ -194,3 +195,43 @@ class DatabaseManager:
         except psycopg2.Error as e:
             print("Error:", e)
             return None
+
+    def update_person(self, id, first_name, last_name):
+        """
+        Updates a person in the database
+        :param id: The id of the person
+        :param first_name: The first name of the person
+        :param last_name: The last name of the person
+        :return: True if the person was successfully updated, False otherwise.
+        """
+        try:
+            if not self.conn:
+                self.open_connection()
+            cursor = self.conn.cursor()
+            cursor.execute("UPDATE person SET first_name = %s, last_name = %s WHERE id = %s",
+                           (first_name, last_name, id))
+            self.conn.commit()
+            return True
+        except psycopg2.Error as e:
+            print("Error:", e)
+            return False
+
+    def update_meetings(self, meetings, participants):
+        """
+        Updates a meeting in the database
+        :param meetings: The meetings to be updated
+        :param participants: The participants of the meetings
+        :return: True if the meetings were successfully updated, False otherwise.
+        """
+        try:
+            if not self.conn:
+                self.open_connection()
+            cursor = self.conn.cursor()
+            for meeting in meetings:
+                cursor.execute("DELETE FROM meeting_participants WHERE meeting_id = %s", (meeting[0][0],))
+                self.add_participants_to_meeting(meeting[0][0], participants)
+            self.conn.commit()
+            return True
+        except psycopg2.Error as e:
+            print("Error:", e)
+            return False
