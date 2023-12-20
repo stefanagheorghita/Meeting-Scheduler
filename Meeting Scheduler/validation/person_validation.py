@@ -3,9 +3,15 @@ from database.manager import DatabaseManager
 
 def format_name(name):
     """
-    It formats the name to have the first letter of each word capitalized
-    :param name: name to be formatted
-    :return: formatted name
+    It formats the name to have the first letter of each word capitalized \n
+    Parameters
+    ----------
+    name: str
+        The name to be formatted
+    Returns
+    -------
+    str
+        The formatted name
     """
     new_name = name.strip()
     new_name = new_name.lower()
@@ -26,10 +32,17 @@ def format_name(name):
 
 def validate_consecutive(name, sep):
     """
-    Validates that the name doesn't contain consecutive separators
-    :param name: name to be validated
-    :param sep: separator
-    :return: True if the name is valid, False otherwise.
+    Validates that the name doesn't contain consecutive separators \n
+    Parameters
+    ----------
+    name: str
+        The name to be validated
+    sep: str
+        The separator
+    Returns
+    -------
+    bool
+        True if the name is valid, False otherwise
     """
     parts = name.split(sep)
     for part in parts:
@@ -40,10 +53,18 @@ def validate_consecutive(name, sep):
 
 def validate_name(name, flag):
     """
-    Validates the basic rules for a name. The name must contain only letters, spaces, dashes or apostrophes
-    :param name: name to be validated
-    :param flag: "first" or "last"
-    :return: (True, None) if the name is valid, (False, error message) otherwise.
+    Validates the basic rules for a name. The name must contain only letters, spaces, dashes or apostrophes \n
+    Parameters
+    ----------
+    name: str
+        The name to be validated
+    flag: str
+        The flag that indicates if the name is first or last
+    Returns
+    -------
+    tuple
+        The first element is True if the name is valid, False otherwise
+        The second element is None if the name is valid, an error message otherwise
     """
     name = name.strip()
     n_chr = [c for c in name if c.isalpha() or c == " " or c == "-" or c == "'"]
@@ -51,7 +72,7 @@ def validate_name(name, flag):
     if name.startswith("-") or name.endswith("-") or name.startswith("'") or name.endswith("'"):
         return False, f"Invalid format for {flag} name!"
     if len(n_chr) != len(name):
-        return False, f"{flag[0].upper()+flag[1:]} name has some invalid symbols!"
+        return False, f"{flag[0].upper() + flag[1:]} name has some invalid symbols!"
     if not validate_consecutive(name, "-"):
         return False, f"Invalid format for {flag} name!"
     if not validate_consecutive(name, "'"):
@@ -61,11 +82,20 @@ def validate_name(name, flag):
 
 def add_person_validation(id, first_name, last_name):
     """
-    Validates the fields of the add person window and adds the person to the database
-    :param id: id of the person
-    :param first_name: First name of the person
-    :param last_name: Last name of the person
-    :return: (True, message) if the fields are valid, (False, error message) otherwise.
+    Validates the fields of the add person window and adds the person to the database \n
+    Parameters
+    ----------
+    id: str
+        The id of the person
+    first_name: str
+        The first name of the person
+    last_name: str
+        The last name of the person
+    Returns
+    -------
+    tuple
+        The first element is True if the person was added successfully, False otherwise
+        The second element is None if the person was added successfully, an error message otherwise
     """
     message = None
     if id == "" or first_name == "" or last_name == "":
@@ -97,6 +127,8 @@ def add_person_validation(id, first_name, last_name):
                       "!"
         first_name = first_name_formatted
         last_name = last_name_formatted
+        if not db_manager.add_person(id, first_name, last_name):
+            return False, "An error occurred while adding the person to the database!"
     if message is None:
         if not db_manager.add_person(id, first_name, last_name):
             return False, "An error occurred while adding the person to the database!"
@@ -105,11 +137,20 @@ def add_person_validation(id, first_name, last_name):
 
 def add_person_confirmation(id, first_name, last_name):
     """
-    Adds the person to the database, for the case where the user is asked which format is correct
-    :param id: id of the person
-    :param first_name: First name of the person
-    :param last_name: Last name of the person
-    :return:
+    Adds the person to the database, for the case where the user is asked which format is correct \n
+    Parameters
+    ----------
+    id: str
+        The id of the person
+    first_name: str
+        The first name of the person
+    last_name: str
+        The last name of the person
+    Returns
+    -------
+    tuple
+        The first element is True if the person was added successfully, False otherwise
+        The second element is None if the person was added successfully, an error message otherwise
     """
     db_manager = DatabaseManager()
     id = int(id)

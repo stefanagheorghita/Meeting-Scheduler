@@ -8,9 +8,14 @@ background_image = None
 
 def background(root):
     """
-    Sets the background image of the given root window (the add person window).
-    :param root:
-    :return:
+    Sets the background image of the given root window (the add person window) \n
+    Parameters
+    ----------
+    root: tk.Tk
+        The root window of the application.
+    Returns
+    -------
+    None
     """
     global background_image
     width = root.winfo_screenwidth()
@@ -25,9 +30,19 @@ def background(root):
 
 def show_input_labels(input_frame):
     """
-    Shows the labels and entry fields for the user to input the person's data.
-    :param input_frame:
-    :return:
+    Shows the labels and entry fields for the user to input the person's data \n
+    Parameters
+    ----------
+    input_frame: tk.Frame
+        The frame where the labels and entry fields will be placed.
+    Returns
+    -------
+    entry_id: tk.Entry
+        The entry field for the id.
+    entry_first_name: tk.Entry
+        The entry field for the first name.
+    entry_last_name: tk.Entry
+        The entry field for the last name.
     """
     label_id = tk.Label(input_frame, text="Id:", font=("Arial", 12))
     label_id.pack()
@@ -48,16 +63,39 @@ def show_input_labels(input_frame):
 
 def different_formatting_case(id, first_name, last_name, formatted_first_name, formatted_last_name):
     """
-    Shows the user the different formatting options for the name and asks him to choose the correct one
-    :param id: id of the person
-    :param first_name: first name introduced by the user
-    :param last_name: last name introduced by the user
-    :param formatted_first_name: formatted first name
-    :param formatted_last_name: formatted last name
-    :return:
+    Shows the user the different formatting options for the name and asks him to choose the correct one \n
+    Parameters
+    ----------
+    id: str
+        The id of the person.
+    first_name: str
+        The first name of the person.
+    last_name: str
+        The last name of the person.
+    formatted_first_name: str
+        The first name of the person in the correct format.
+    formatted_last_name: str
+        The last name of the person in the correct format.
+    Returns
+    -------
+    None
     """
 
     def add_now(id, first_name, last_name):
+        """
+        Sends the data to be added to the database and shows the if the operation was successful or not \n
+        Parameters
+        ----------
+        id: str
+            The id of the person.
+        first_name: str
+            The first name of the person.
+        last_name: str
+            The last name of the person.
+        Returns
+        -------
+        None
+        """
         result, msg = add_person_confirmation(id, first_name, last_name)
         if result:
             messagebox.showinfo("Success", "Person successfully added to the database!")
@@ -115,11 +153,18 @@ def different_formatting_case(id, first_name, last_name, formatted_first_name, f
 def save_person(entry_id, entry_first_name, entry_last_name):
     """
     Sends the data to the validation function and to be added to the database and shows the if the operation
-    was successful or not.
-    :param entry_id:
-    :param entry_first_name:
-    :param entry_last_name:
-    :return:
+    was successful or not \n
+    Parameters
+    ----------
+    entry_id: tk.Entry
+        The entry field for the id.
+    entry_first_name: tk.Entry
+        The entry field for the first name.
+    entry_last_name: tk.Entry
+        The entry field for the last name.
+    Returns
+    -------
+    None
     """
     id = entry_id.get()
     first_name = entry_first_name.get()
@@ -143,9 +188,14 @@ def save_person(entry_id, entry_first_name, entry_last_name):
 
 def add_person(root):
     """
-    Constructs the add person window.
-    :param root:
-    :return:
+    Constructs the add person window \n
+    Parameters
+    ----------
+    root: tk.Tk
+        The root window of the application.
+    Returns
+    -------
+    None
     """
     for widget in root.winfo_children():
         widget.pack_forget()

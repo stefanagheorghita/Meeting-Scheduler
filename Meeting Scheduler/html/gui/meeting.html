@@ -1,0 +1,869 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>gui.meeting API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>gui.meeting</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import tkinter as tk
+from datetime import datetime, time
+from tkinter import ttk, messagebox
+
+from PIL import Image, ImageTk
+from tkcalendar import DateEntry
+
+from database.manager import DatabaseManager
+from validation.meeting_validation import validate_meeting_data
+
+background_image = None
+participant_window_open = False
+
+
+def background(root):
+    &#34;&#34;&#34;
+    Sets the background image of the given root window.
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    global background_image
+    width = root.winfo_screenwidth()
+    height = root.winfo_screenheight()
+    photo = Image.open(&#34;../images/meeting.gif&#34;)
+    mod_img = photo.resize((width, height))
+    background_image = ImageTk.PhotoImage(mod_img)
+    background_label = tk.Label(root, image=background_image)
+    background_label.place(relx=0.5, rely=0.5, relheight=1, relwidth=1, anchor=&#34;center&#34;)
+
+
+def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_combo, end_hour_combo, end_minute_combo,
+             name_entry):
+    &#34;&#34;&#34;
+    Gets the data from the fields of the add meeting screen
+    Parameters
+    ----------
+    start_date_entry : DateEntry
+        The entry field for the start date
+    end_date_entry : DateEntry
+        The entry field for the end date
+    start_hour_combo : Combobox
+        The combobox for the start hour
+    start_minute_combo : tk.Combobox
+        The combobox for the start minute
+    end_hour_combo : tk.Combobox
+        The combobox for the end hour
+    end_minute_combo : tk.Combobox
+        The combobox for the end minute
+    name_entry : tk.Entry
+        The entry field for the name
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    global participant_window_open
+    start_date = start_date_entry.get_date()
+    end_date = end_date_entry.get_date()
+    start_hour = start_hour_combo.get()
+    start_minute = start_minute_combo.get()
+    end_hour = end_hour_combo.get()
+    end_minute = end_minute_combo.get()
+    name = name_entry.get()
+    result, msg = validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name)
+    print(result, msg)
+    if result and not participant_window_open:
+        name_entry.delete(0, tk.END)
+        start_hour_combo.set(&#34;00&#34;)
+        start_minute_combo.set(&#34;00&#34;)
+        end_hour_combo.set(&#34;00&#34;)
+        end_minute_combo.set(&#34;00&#34;)
+        participant_window_open = True
+        open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name)
+    elif result and participant_window_open:
+        pass
+    else:
+        messagebox.showerror(&#34;Error&#34;, msg)
+
+
+def add_meeting_screen(root):
+    &#34;&#34;&#34;
+    Shows the add meeting screen \n
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    for widget in root.winfo_children():
+        widget.pack_forget()
+
+    def back_btn_func():
+        from gui.main_menu import redraw
+        redraw(root)
+
+    background(root)
+
+    back_frame = tk.Frame(root)
+    back_frame.place(relx=0, rely=0, anchor=&#34;nw&#34;, width=60, height=30)
+    back_button = tk.Button(back_frame, text=&#34;\u2190 Back&#34;, command=back_btn_func, bg=&#34;#FF3333&#34;,
+                            activebackground=&#34;#CC0000&#34;, fg=&#34;white&#34;,
+                            font=(&#34;Arial&#34;, 10))
+    back_button.pack(fill=&#34;both&#34;, expand=True, padx=1, pady=1)
+
+    meeting_frame = tk.Frame(root, bg=&#34;white&#34;, borderwidth=1, relief=&#34;solid&#34;)
+    meeting_frame.place(relx=0.5, rely=0.5, anchor=&#34;center&#34;, relwidth=0.8, relheight=0.6)
+
+    start_date_label = ttk.Label(meeting_frame, text=&#34; Start Date:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                                 borderwidth=1, relief=&#34;solid&#34;)
+    start_date_label.grid(row=0, column=0, padx=10, pady=5, sticky=&#34;w&#34;)
+    start_date_entry = DateEntry(meeting_frame, font=(&#34;Arial&#34;, 12), background=&#39;darkblue&#39;, foreground=&#39;white&#39;,
+                                 borderwidth=2, date_pattern=&#39;dd/mm/yyyy&#39;)
+    start_date_entry.grid(row=0, column=1, padx=10, pady=5)
+    start_date_entry.bind(&#34;&lt;Key&gt;&#34;, disable_edit)
+
+    date_label = ttk.Label(meeting_frame, text=&#34;End Date:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12), borderwidth=1,
+                           relief=&#34;solid&#34;)
+    date_label.grid(row=1, column=0, padx=10, pady=5, sticky=&#34;w&#34;)
+    date_entry = DateEntry(meeting_frame, font=(&#34;Arial&#34;, 12), background=&#39;darkblue&#39;, foreground=&#39;white&#39;, borderwidth=2,
+                           date_pattern=&#39;dd/mm/yyyy&#39;)
+    date_entry.grid(row=1, column=1, padx=10, pady=5)
+    date_entry.bind(&#34;&lt;Key&gt;&#34;, disable_edit)
+
+    hours = [str(i).zfill(2) for i in range(24)]
+    minutes = [str(i).zfill(2) for i in range(60)]
+
+    start_time_label = ttk.Label(meeting_frame, text=&#34;Start Time:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                                 borderwidth=1, relief=&#34;solid&#34;)
+    start_time_label.grid(row=2, column=0, padx=10, pady=5, sticky=&#34;e&#34;)
+
+    start_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    start_hour_combo.grid(row=2, column=1, padx=5, pady=5)
+    start_hour_combo.set(&#34;00&#34;)
+
+    start_minute_label = ttk.Label(meeting_frame, text=&#34;:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12))
+    start_minute_label.grid(row=2, column=2, padx=5, pady=5)
+
+    start_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    start_minute_combo.grid(row=2, column=3, padx=30, pady=5)
+    start_minute_combo.set(&#34;00&#34;)
+
+    end_time_label = ttk.Label(meeting_frame, text=&#34;End Time:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12), borderwidth=1,
+                               relief=&#34;solid&#34;)
+    end_time_label.grid(row=3, column=0, padx=10, pady=5, sticky=&#34;e&#34;)
+
+    end_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    end_hour_combo.grid(row=3, column=1, padx=5, pady=5)
+    end_hour_combo.set(&#34;00&#34;)
+
+    end_minute_label = ttk.Label(meeting_frame, text=&#34;:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12))
+    end_minute_label.grid(row=3, column=2, padx=5, pady=5)
+
+    end_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    end_minute_combo.grid(row=3, column=3, padx=30, pady=5)
+    end_minute_combo.set(&#34;00&#34;)
+
+    name_label = ttk.Label(meeting_frame, text=&#34;Meeting Name:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                           borderwidth=1, relief=&#34;solid&#34;)
+    name_label.grid(row=4, column=0, padx=3, pady=5, sticky=&#34;w&#34;)
+
+    name_entry = ttk.Entry(meeting_frame, font=(&#34;Arial&#34;, 12), width=15)
+    name_entry.grid(row=4, column=1, padx=5, pady=5)
+
+    save_button = ttk.Button(meeting_frame, text=&#34;Add participants&#34;,
+                             command=lambda: get_data(start_date_entry, date_entry, start_hour_combo,
+                                                      start_minute_combo, end_hour_combo,
+                                                      end_minute_combo, name_entry),
+                             style=&#39;Button.TButton&#39;)
+    save_button.grid(row=6, columnspan=3, pady=20)
+
+    style = ttk.Style()
+    style.theme_use(&#34;alt&#34;)
+    style.configure(&#34;Button.TButton&#34;, foreground=&#34;white&#34;, background=&#34;#66CC66&#34;, font=(&#34;Arial&#34;, 12))
+    style.map(&#34;TButton&#34;, background=[(&#34;active&#34;, &#34;purple&#34;)])
+
+
+def disable_edit(event):
+    &#34;&#34;&#34;
+    Disables the editing of the date entry fields \n
+    Parameters
+    ----------
+    event : tk.Event
+        The event that triggered the function
+    Returns
+    -------
+    str
+        &#34;break&#34;
+    &#34;&#34;&#34;
+    return &#34;break&#34;
+
+
+def open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name):
+    &#34;&#34;&#34;
+    Opens the window where the user can select the participants of the meeting \n
+    Parameters
+    ----------
+    start_date : datetime.datetime
+        The start date of the meeting
+    end_date : datetime.datetime
+        The end date of the meeting
+    start_hour : str
+        The start hour of the meeting
+    start_minute : str
+        The start minute of the meeting
+    end_hour : str
+        The end hour of the meeting
+    end_minute : str
+        The end minute of the meeting
+    name : str
+        The name of the meeting
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+
+    db_manager = DatabaseManager()
+    participants = db_manager.find_all_persons()
+    if participants is None:
+        messagebox.showerror(&#34;Error&#34;, &#34;There was an error while retrieving the participants from the database!&#34;)
+
+    participants_window = tk.Toplevel()
+    participants_window.title(&#34;Select Participants&#34;)
+    window_width = 400
+    window_height = 400
+    screen_width = participants_window.winfo_screenwidth()
+    screen_height = participants_window.winfo_screenheight()
+    x_coordinate = (screen_width - window_width) // 2
+    y_coordinate = (screen_height - window_height) // 2
+    participants_window.geometry(f&#34;{window_width}x{window_height}+{x_coordinate}+{y_coordinate}&#34;)
+
+    selected_participants = []
+
+    def save_selected():
+        &#34;&#34;&#34;
+        Saves the selected participants and sends the data to the database \n
+        Returns
+        -------
+        None
+        &#34;&#34;&#34;
+        global participant_window_open
+        if len(selected_participants) == 0:
+            messagebox.showerror(&#34;Error&#34;, &#34;You must select at least one participant!&#34;)
+            return
+        participants_window.destroy()
+        participant_window_open = False
+        send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants, name)
+
+    save_button = tk.Button(participants_window, text=&#34;Save&#34;, command=save_selected)
+    save_button.pack(side=tk.BOTTOM, anchor=&#34;nw&#34;, fill=tk.X)
+
+    participants_canvas = tk.Canvas(participants_window)
+    participants_frame = tk.Frame(participants_canvas)
+
+    scrollbar = tk.Scrollbar(participants_window, orient=&#34;vertical&#34;, command=participants_canvas.yview)
+    scrollbar.pack(side=&#34;right&#34;, fill=&#34;y&#34;)
+
+    participants_canvas.pack(side=&#34;left&#34;, fill=&#34;y&#34;, expand=True)
+    participants_canvas.create_window((0, 0), window=participants_frame, anchor=&#34;nw&#34;)
+
+    participants_frame.bind(&#34;&lt;Configure&gt;&#34;,
+                            lambda e: participants_canvas.configure(scrollregion=participants_canvas.bbox(&#34;all&#34;)))
+
+    participants_canvas.configure(yscrollcommand=scrollbar.set)
+
+    checkbox_vars = []
+    for participant in participants:
+        var = tk.BooleanVar()
+        var.set(False)
+        checkbox_vars.append(var)
+
+        def on_checkbox_click(participant=participant, var=var):
+            if var.get() and participant not in selected_participants:
+                selected_participants.append(participant)
+            elif not var.get() and participant in selected_participants:
+                selected_participants.remove(participant)
+
+        text = f&#34;{participant[0]} - {participant[1]} {participant[2]}&#34;
+        checkbox = tk.Checkbutton(participants_frame, text=text, variable=var,
+                                  command=on_checkbox_click, font=(&#34;Arial&#34;, 12))
+        checkbox.pack(anchor=tk.W)
+
+
+def send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants, name):
+    &#34;&#34;&#34;
+    Sends the data to the database \n
+    Parameters
+    ----------
+    start_date : datetime.datetime
+        The start date of the meeting
+    end_date : datetime.datetime
+        The end date of the meeting
+    start_hour : str
+        The start hour of the meeting
+    start_minute : str
+        The start minute of the meeting
+    end_hour : str
+        The end hour of the meeting
+    end_minute : str
+        The end minute of the meeting
+    selected_participants : list
+        The list of the selected participants
+    name : str
+        The name of the meeting
+    Returns
+    -------
+    None
+
+
+    &#34;&#34;&#34;
+    db_manager = DatabaseManager()
+    start_hour = int(start_hour)
+    start_minute = int(start_minute)
+    end_hour = int(end_hour)
+    end_minute = int(end_minute)
+    start_time = datetime.combine(start_date, time(start_hour, start_minute))
+    end_time = datetime.combine(end_date, time(end_hour, end_minute))
+
+    result = db_manager.add_meeting(start_time, end_time, selected_participants, name)
+    if result:
+        messagebox.showinfo(&#34;Success&#34;, &#34;Meeting successfully added to the database!&#34;)
+    else:
+        messagebox.showerror(&#34;Error&#34;, &#34;There was an error while adding the meeting to the database!&#34;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="gui.meeting.add_meeting_screen"><code class="name flex">
+<span>def <span class="ident">add_meeting_screen</span></span>(<span>root)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Shows the add meeting screen </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>root</code></strong> :&ensp;<code>tk.Tk</code></dt>
+<dd>The root window</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_meeting_screen(root):
+    &#34;&#34;&#34;
+    Shows the add meeting screen \n
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    for widget in root.winfo_children():
+        widget.pack_forget()
+
+    def back_btn_func():
+        from gui.main_menu import redraw
+        redraw(root)
+
+    background(root)
+
+    back_frame = tk.Frame(root)
+    back_frame.place(relx=0, rely=0, anchor=&#34;nw&#34;, width=60, height=30)
+    back_button = tk.Button(back_frame, text=&#34;\u2190 Back&#34;, command=back_btn_func, bg=&#34;#FF3333&#34;,
+                            activebackground=&#34;#CC0000&#34;, fg=&#34;white&#34;,
+                            font=(&#34;Arial&#34;, 10))
+    back_button.pack(fill=&#34;both&#34;, expand=True, padx=1, pady=1)
+
+    meeting_frame = tk.Frame(root, bg=&#34;white&#34;, borderwidth=1, relief=&#34;solid&#34;)
+    meeting_frame.place(relx=0.5, rely=0.5, anchor=&#34;center&#34;, relwidth=0.8, relheight=0.6)
+
+    start_date_label = ttk.Label(meeting_frame, text=&#34; Start Date:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                                 borderwidth=1, relief=&#34;solid&#34;)
+    start_date_label.grid(row=0, column=0, padx=10, pady=5, sticky=&#34;w&#34;)
+    start_date_entry = DateEntry(meeting_frame, font=(&#34;Arial&#34;, 12), background=&#39;darkblue&#39;, foreground=&#39;white&#39;,
+                                 borderwidth=2, date_pattern=&#39;dd/mm/yyyy&#39;)
+    start_date_entry.grid(row=0, column=1, padx=10, pady=5)
+    start_date_entry.bind(&#34;&lt;Key&gt;&#34;, disable_edit)
+
+    date_label = ttk.Label(meeting_frame, text=&#34;End Date:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12), borderwidth=1,
+                           relief=&#34;solid&#34;)
+    date_label.grid(row=1, column=0, padx=10, pady=5, sticky=&#34;w&#34;)
+    date_entry = DateEntry(meeting_frame, font=(&#34;Arial&#34;, 12), background=&#39;darkblue&#39;, foreground=&#39;white&#39;, borderwidth=2,
+                           date_pattern=&#39;dd/mm/yyyy&#39;)
+    date_entry.grid(row=1, column=1, padx=10, pady=5)
+    date_entry.bind(&#34;&lt;Key&gt;&#34;, disable_edit)
+
+    hours = [str(i).zfill(2) for i in range(24)]
+    minutes = [str(i).zfill(2) for i in range(60)]
+
+    start_time_label = ttk.Label(meeting_frame, text=&#34;Start Time:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                                 borderwidth=1, relief=&#34;solid&#34;)
+    start_time_label.grid(row=2, column=0, padx=10, pady=5, sticky=&#34;e&#34;)
+
+    start_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    start_hour_combo.grid(row=2, column=1, padx=5, pady=5)
+    start_hour_combo.set(&#34;00&#34;)
+
+    start_minute_label = ttk.Label(meeting_frame, text=&#34;:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12))
+    start_minute_label.grid(row=2, column=2, padx=5, pady=5)
+
+    start_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    start_minute_combo.grid(row=2, column=3, padx=30, pady=5)
+    start_minute_combo.set(&#34;00&#34;)
+
+    end_time_label = ttk.Label(meeting_frame, text=&#34;End Time:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12), borderwidth=1,
+                               relief=&#34;solid&#34;)
+    end_time_label.grid(row=3, column=0, padx=10, pady=5, sticky=&#34;e&#34;)
+
+    end_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    end_hour_combo.grid(row=3, column=1, padx=5, pady=5)
+    end_hour_combo.set(&#34;00&#34;)
+
+    end_minute_label = ttk.Label(meeting_frame, text=&#34;:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12))
+    end_minute_label.grid(row=3, column=2, padx=5, pady=5)
+
+    end_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    end_minute_combo.grid(row=3, column=3, padx=30, pady=5)
+    end_minute_combo.set(&#34;00&#34;)
+
+    name_label = ttk.Label(meeting_frame, text=&#34;Meeting Name:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                           borderwidth=1, relief=&#34;solid&#34;)
+    name_label.grid(row=4, column=0, padx=3, pady=5, sticky=&#34;w&#34;)
+
+    name_entry = ttk.Entry(meeting_frame, font=(&#34;Arial&#34;, 12), width=15)
+    name_entry.grid(row=4, column=1, padx=5, pady=5)
+
+    save_button = ttk.Button(meeting_frame, text=&#34;Add participants&#34;,
+                             command=lambda: get_data(start_date_entry, date_entry, start_hour_combo,
+                                                      start_minute_combo, end_hour_combo,
+                                                      end_minute_combo, name_entry),
+                             style=&#39;Button.TButton&#39;)
+    save_button.grid(row=6, columnspan=3, pady=20)
+
+    style = ttk.Style()
+    style.theme_use(&#34;alt&#34;)
+    style.configure(&#34;Button.TButton&#34;, foreground=&#34;white&#34;, background=&#34;#66CC66&#34;, font=(&#34;Arial&#34;, 12))
+    style.map(&#34;TButton&#34;, background=[(&#34;active&#34;, &#34;purple&#34;)])</code></pre>
+</details>
+</dd>
+<dt id="gui.meeting.background"><code class="name flex">
+<span>def <span class="ident">background</span></span>(<span>root)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the background image of the given root window.
+Parameters</p>
+<hr>
+<dl>
+<dt><strong><code>root</code></strong> :&ensp;<code>tk.Tk</code></dt>
+<dd>The root window</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def background(root):
+    &#34;&#34;&#34;
+    Sets the background image of the given root window.
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    global background_image
+    width = root.winfo_screenwidth()
+    height = root.winfo_screenheight()
+    photo = Image.open(&#34;../images/meeting.gif&#34;)
+    mod_img = photo.resize((width, height))
+    background_image = ImageTk.PhotoImage(mod_img)
+    background_label = tk.Label(root, image=background_image)
+    background_label.place(relx=0.5, rely=0.5, relheight=1, relwidth=1, anchor=&#34;center&#34;)</code></pre>
+</details>
+</dd>
+<dt id="gui.meeting.disable_edit"><code class="name flex">
+<span>def <span class="ident">disable_edit</span></span>(<span>event)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Disables the editing of the date entry fields </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>event</code></strong> :&ensp;<code>tk.Event</code></dt>
+<dd>The event that triggered the function</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>"break"</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def disable_edit(event):
+    &#34;&#34;&#34;
+    Disables the editing of the date entry fields \n
+    Parameters
+    ----------
+    event : tk.Event
+        The event that triggered the function
+    Returns
+    -------
+    str
+        &#34;break&#34;
+    &#34;&#34;&#34;
+    return &#34;break&#34;</code></pre>
+</details>
+</dd>
+<dt id="gui.meeting.get_data"><code class="name flex">
+<span>def <span class="ident">get_data</span></span>(<span>start_date_entry, end_date_entry, start_hour_combo, start_minute_combo, end_hour_combo, end_minute_combo, name_entry)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the data from the fields of the add meeting screen
+Parameters</p>
+<hr>
+<dl>
+<dt><strong><code>start_date_entry</code></strong> :&ensp;<code>DateEntry</code></dt>
+<dd>The entry field for the start date</dd>
+<dt><strong><code>end_date_entry</code></strong> :&ensp;<code>DateEntry</code></dt>
+<dd>The entry field for the end date</dd>
+<dt><strong><code>start_hour_combo</code></strong> :&ensp;<code>Combobox</code></dt>
+<dd>The combobox for the start hour</dd>
+<dt><strong><code>start_minute_combo</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dd>The combobox for the start minute</dd>
+<dt><strong><code>end_hour_combo</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dd>The combobox for the end hour</dd>
+<dt><strong><code>end_minute_combo</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dd>The combobox for the end minute</dd>
+<dt><strong><code>name_entry</code></strong> :&ensp;<code>tk.Entry</code></dt>
+<dd>The entry field for the name</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_combo, end_hour_combo, end_minute_combo,
+             name_entry):
+    &#34;&#34;&#34;
+    Gets the data from the fields of the add meeting screen
+    Parameters
+    ----------
+    start_date_entry : DateEntry
+        The entry field for the start date
+    end_date_entry : DateEntry
+        The entry field for the end date
+    start_hour_combo : Combobox
+        The combobox for the start hour
+    start_minute_combo : tk.Combobox
+        The combobox for the start minute
+    end_hour_combo : tk.Combobox
+        The combobox for the end hour
+    end_minute_combo : tk.Combobox
+        The combobox for the end minute
+    name_entry : tk.Entry
+        The entry field for the name
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    global participant_window_open
+    start_date = start_date_entry.get_date()
+    end_date = end_date_entry.get_date()
+    start_hour = start_hour_combo.get()
+    start_minute = start_minute_combo.get()
+    end_hour = end_hour_combo.get()
+    end_minute = end_minute_combo.get()
+    name = name_entry.get()
+    result, msg = validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name)
+    print(result, msg)
+    if result and not participant_window_open:
+        name_entry.delete(0, tk.END)
+        start_hour_combo.set(&#34;00&#34;)
+        start_minute_combo.set(&#34;00&#34;)
+        end_hour_combo.set(&#34;00&#34;)
+        end_minute_combo.set(&#34;00&#34;)
+        participant_window_open = True
+        open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name)
+    elif result and participant_window_open:
+        pass
+    else:
+        messagebox.showerror(&#34;Error&#34;, msg)</code></pre>
+</details>
+</dd>
+<dt id="gui.meeting.open_choose_participants"><code class="name flex">
+<span>def <span class="ident">open_choose_participants</span></span>(<span>start_date, end_date, start_hour, start_minute, end_hour, end_minute, name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Opens the window where the user can select the participants of the meeting </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>start_date</code></strong> :&ensp;<code>datetime.datetime</code></dt>
+<dd>The start date of the meeting</dd>
+<dt><strong><code>end_date</code></strong> :&ensp;<code>datetime.datetime</code></dt>
+<dd>The end date of the meeting</dd>
+<dt><strong><code>start_hour</code></strong> :&ensp;<code>str</code></dt>
+<dd>The start hour of the meeting</dd>
+<dt><strong><code>start_minute</code></strong> :&ensp;<code>str</code></dt>
+<dd>The start minute of the meeting</dd>
+<dt><strong><code>end_hour</code></strong> :&ensp;<code>str</code></dt>
+<dd>The end hour of the meeting</dd>
+<dt><strong><code>end_minute</code></strong> :&ensp;<code>str</code></dt>
+<dd>The end minute of the meeting</dd>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the meeting</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name):
+    &#34;&#34;&#34;
+    Opens the window where the user can select the participants of the meeting \n
+    Parameters
+    ----------
+    start_date : datetime.datetime
+        The start date of the meeting
+    end_date : datetime.datetime
+        The end date of the meeting
+    start_hour : str
+        The start hour of the meeting
+    start_minute : str
+        The start minute of the meeting
+    end_hour : str
+        The end hour of the meeting
+    end_minute : str
+        The end minute of the meeting
+    name : str
+        The name of the meeting
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+
+    db_manager = DatabaseManager()
+    participants = db_manager.find_all_persons()
+    if participants is None:
+        messagebox.showerror(&#34;Error&#34;, &#34;There was an error while retrieving the participants from the database!&#34;)
+
+    participants_window = tk.Toplevel()
+    participants_window.title(&#34;Select Participants&#34;)
+    window_width = 400
+    window_height = 400
+    screen_width = participants_window.winfo_screenwidth()
+    screen_height = participants_window.winfo_screenheight()
+    x_coordinate = (screen_width - window_width) // 2
+    y_coordinate = (screen_height - window_height) // 2
+    participants_window.geometry(f&#34;{window_width}x{window_height}+{x_coordinate}+{y_coordinate}&#34;)
+
+    selected_participants = []
+
+    def save_selected():
+        &#34;&#34;&#34;
+        Saves the selected participants and sends the data to the database \n
+        Returns
+        -------
+        None
+        &#34;&#34;&#34;
+        global participant_window_open
+        if len(selected_participants) == 0:
+            messagebox.showerror(&#34;Error&#34;, &#34;You must select at least one participant!&#34;)
+            return
+        participants_window.destroy()
+        participant_window_open = False
+        send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants, name)
+
+    save_button = tk.Button(participants_window, text=&#34;Save&#34;, command=save_selected)
+    save_button.pack(side=tk.BOTTOM, anchor=&#34;nw&#34;, fill=tk.X)
+
+    participants_canvas = tk.Canvas(participants_window)
+    participants_frame = tk.Frame(participants_canvas)
+
+    scrollbar = tk.Scrollbar(participants_window, orient=&#34;vertical&#34;, command=participants_canvas.yview)
+    scrollbar.pack(side=&#34;right&#34;, fill=&#34;y&#34;)
+
+    participants_canvas.pack(side=&#34;left&#34;, fill=&#34;y&#34;, expand=True)
+    participants_canvas.create_window((0, 0), window=participants_frame, anchor=&#34;nw&#34;)
+
+    participants_frame.bind(&#34;&lt;Configure&gt;&#34;,
+                            lambda e: participants_canvas.configure(scrollregion=participants_canvas.bbox(&#34;all&#34;)))
+
+    participants_canvas.configure(yscrollcommand=scrollbar.set)
+
+    checkbox_vars = []
+    for participant in participants:
+        var = tk.BooleanVar()
+        var.set(False)
+        checkbox_vars.append(var)
+
+        def on_checkbox_click(participant=participant, var=var):
+            if var.get() and participant not in selected_participants:
+                selected_participants.append(participant)
+            elif not var.get() and participant in selected_participants:
+                selected_participants.remove(participant)
+
+        text = f&#34;{participant[0]} - {participant[1]} {participant[2]}&#34;
+        checkbox = tk.Checkbutton(participants_frame, text=text, variable=var,
+                                  command=on_checkbox_click, font=(&#34;Arial&#34;, 12))
+        checkbox.pack(anchor=tk.W)</code></pre>
+</details>
+</dd>
+<dt id="gui.meeting.send_data"><code class="name flex">
+<span>def <span class="ident">send_data</span></span>(<span>start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants, name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sends the data to the database </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>start_date</code></strong> :&ensp;<code>datetime.datetime</code></dt>
+<dd>The start date of the meeting</dd>
+<dt><strong><code>end_date</code></strong> :&ensp;<code>datetime.datetime</code></dt>
+<dd>The end date of the meeting</dd>
+<dt><strong><code>start_hour</code></strong> :&ensp;<code>str</code></dt>
+<dd>The start hour of the meeting</dd>
+<dt><strong><code>start_minute</code></strong> :&ensp;<code>str</code></dt>
+<dd>The start minute of the meeting</dd>
+<dt><strong><code>end_hour</code></strong> :&ensp;<code>str</code></dt>
+<dd>The end hour of the meeting</dd>
+<dt><strong><code>end_minute</code></strong> :&ensp;<code>str</code></dt>
+<dd>The end minute of the meeting</dd>
+<dt><strong><code>selected_participants</code></strong> :&ensp;<code>list</code></dt>
+<dd>The list of the selected participants</dd>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the meeting</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants, name):
+    &#34;&#34;&#34;
+    Sends the data to the database \n
+    Parameters
+    ----------
+    start_date : datetime.datetime
+        The start date of the meeting
+    end_date : datetime.datetime
+        The end date of the meeting
+    start_hour : str
+        The start hour of the meeting
+    start_minute : str
+        The start minute of the meeting
+    end_hour : str
+        The end hour of the meeting
+    end_minute : str
+        The end minute of the meeting
+    selected_participants : list
+        The list of the selected participants
+    name : str
+        The name of the meeting
+    Returns
+    -------
+    None
+
+
+    &#34;&#34;&#34;
+    db_manager = DatabaseManager()
+    start_hour = int(start_hour)
+    start_minute = int(start_minute)
+    end_hour = int(end_hour)
+    end_minute = int(end_minute)
+    start_time = datetime.combine(start_date, time(start_hour, start_minute))
+    end_time = datetime.combine(end_date, time(end_hour, end_minute))
+
+    result = db_manager.add_meeting(start_time, end_time, selected_participants, name)
+    if result:
+        messagebox.showinfo(&#34;Success&#34;, &#34;Meeting successfully added to the database!&#34;)
+    else:
+        messagebox.showerror(&#34;Error&#34;, &#34;There was an error while adding the meeting to the database!&#34;)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="gui" href="index.html">gui</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="gui.meeting.add_meeting_screen" href="#gui.meeting.add_meeting_screen">add_meeting_screen</a></code></li>
+<li><code><a title="gui.meeting.background" href="#gui.meeting.background">background</a></code></li>
+<li><code><a title="gui.meeting.disable_edit" href="#gui.meeting.disable_edit">disable_edit</a></code></li>
+<li><code><a title="gui.meeting.get_data" href="#gui.meeting.get_data">get_data</a></code></li>
+<li><code><a title="gui.meeting.open_choose_participants" href="#gui.meeting.open_choose_participants">open_choose_participants</a></code></li>
+<li><code><a title="gui.meeting.send_data" href="#gui.meeting.send_data">send_data</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

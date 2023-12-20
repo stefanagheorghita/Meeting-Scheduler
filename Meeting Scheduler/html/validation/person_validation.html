@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>validation.person_validation API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>validation.person_validation</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from database.manager import DatabaseManager
+
+
+def format_name(name):
+    &#34;&#34;&#34;
+    It formats the name to have the first letter of each word capitalized \n
+    Parameters
+    ----------
+    name: str
+        The name to be formatted
+    Returns
+    -------
+    str
+        The formatted name
+    &#34;&#34;&#34;
+    new_name = name.strip()
+    new_name = new_name.lower()
+    formatted = &#34;&#34;
+    formatted += new_name[0].upper()
+    for i in range(1, len(new_name)):
+        if new_name[i - 1] == &#34;-&#34; or new_name[i - 1] == &#34;&#39;&#34; or new_name[i - 1] == &#34; &#34;:
+            formatted += new_name[i].upper()
+        else:
+            formatted += new_name[i]
+    parts = [part for part in formatted.replace(&#39;-&#39;, &#39; &#39;).split() if part.strip()]
+    formatted_name = &#39;-&#39;.join(parts)
+
+    parts = [part for part in formatted_name.replace(&#34;&#39;&#34;, &#39; &#39;).split() if part.strip()]
+    formatted_name = &#34;&#39;&#34;.join(parts)
+    return formatted_name
+
+
+def validate_consecutive(name, sep):
+    &#34;&#34;&#34;
+    Validates that the name doesn&#39;t contain consecutive separators \n
+    Parameters
+    ----------
+    name: str
+        The name to be validated
+    sep: str
+        The separator
+    Returns
+    -------
+    bool
+        True if the name is valid, False otherwise
+    &#34;&#34;&#34;
+    parts = name.split(sep)
+    for part in parts:
+        if all(char.isspace() for char in part):
+            return False
+    return True
+
+
+def validate_name(name, flag):
+    &#34;&#34;&#34;
+    Validates the basic rules for a name. The name must contain only letters, spaces, dashes or apostrophes \n
+    Parameters
+    ----------
+    name: str
+        The name to be validated
+    flag: str
+        The flag that indicates if the name is first or last
+    Returns
+    -------
+    tuple
+        The first element is True if the name is valid, False otherwise
+        The second element is None if the name is valid, an error message otherwise
+    &#34;&#34;&#34;
+    name = name.strip()
+    n_chr = [c for c in name if c.isalpha() or c == &#34; &#34; or c == &#34;-&#34; or c == &#34;&#39;&#34;]
+    name = name.strip()
+    if name.startswith(&#34;-&#34;) or name.endswith(&#34;-&#34;) or name.startswith(&#34;&#39;&#34;) or name.endswith(&#34;&#39;&#34;):
+        return False, f&#34;Invalid format for {flag} name!&#34;
+    if len(n_chr) != len(name):
+        return False, f&#34;{flag[0].upper() + flag[1:]} name has some invalid symbols!&#34;
+    if not validate_consecutive(name, &#34;-&#34;):
+        return False, f&#34;Invalid format for {flag} name!&#34;
+    if not validate_consecutive(name, &#34;&#39;&#34;):
+        return False, f&#34;Invalid format for {flag} name!&#34;
+    return True, None
+
+
+def add_person_validation(id, first_name, last_name):
+    &#34;&#34;&#34;
+    Validates the fields of the add person window and adds the person to the database \n
+    Parameters
+    ----------
+    id: str
+        The id of the person
+    first_name: str
+        The first name of the person
+    last_name: str
+        The last name of the person
+    Returns
+    -------
+    tuple
+        The first element is True if the person was added successfully, False otherwise
+        The second element is None if the person was added successfully, an error message otherwise
+    &#34;&#34;&#34;
+    message = None
+    if id == &#34;&#34; or first_name == &#34;&#34; or last_name == &#34;&#34;:
+        return False, &#34;All fields must be filled!&#34;
+    if not id.isdigit():
+        return False, &#34;Id must be a number!&#34;
+    if int(id) &lt;= 0 or int(id) &gt; 2147483647:
+        return False, &#34;The id is not within the limits!&#34;
+    result, msg = validate_name(first_name, &#34;first&#34;)
+    result2, msg2 = validate_name(last_name, &#34;last&#34;)
+    if not result or not result2:
+        if msg is not None:
+            return False, msg
+        else:
+            return False, msg2
+    db_manager = DatabaseManager()
+    id = int(id)
+    if not db_manager.search_id_db(id):
+        return False, &#34;There is already a person in the database with the given id!&#34;
+    first_name = first_name.strip()
+    last_name = last_name.strip()
+    first_name_formatted = format_name(first_name)
+    last_name_formatted = format_name(last_name)
+    if first_name_formatted[1:] != first_name[1:] or last_name_formatted[1:] != last_name[1:]:
+        message = first_name_formatted + &#34;!!&#34; + last_name_formatted
+    else:
+        if first_name_formatted[0] != first_name[0] or last_name_formatted[0] != last_name[0]:
+            message = &#34;The person was added to the database as &#34; + first_name_formatted + &#34; &#34; + last_name_formatted + \
+                      &#34;!&#34;
+        first_name = first_name_formatted
+        last_name = last_name_formatted
+        if not db_manager.add_person(id, first_name, last_name):
+            return False, &#34;An error occurred while adding the person to the database!&#34;
+    if message is None:
+        if not db_manager.add_person(id, first_name, last_name):
+            return False, &#34;An error occurred while adding the person to the database!&#34;
+    return True, message
+
+
+def add_person_confirmation(id, first_name, last_name):
+    &#34;&#34;&#34;
+    Adds the person to the database, for the case where the user is asked which format is correct \n
+    Parameters
+    ----------
+    id: str
+        The id of the person
+    first_name: str
+        The first name of the person
+    last_name: str
+        The last name of the person
+    Returns
+    -------
+    tuple
+        The first element is True if the person was added successfully, False otherwise
+        The second element is None if the person was added successfully, an error message otherwise
+    &#34;&#34;&#34;
+    db_manager = DatabaseManager()
+    id = int(id)
+    if not db_manager.add_person(id, first_name, last_name):
+        return False, &#34;An error occurred while adding the person to the database!&#34;
+    return True, None</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="validation.person_validation.add_person_confirmation"><code class="name flex">
+<span>def <span class="ident">add_person_confirmation</span></span>(<span>id, first_name, last_name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds the person to the database, for the case where the user is asked which format is correct </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>id</code></strong> :&ensp;<code>str</code></dt>
+<dd>The id of the person</dd>
+<dt><strong><code>first_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The first name of the person</dd>
+<dt><strong><code>last_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The last name of the person</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>The first element is True if the person was added successfully, False otherwise
+The second element is None if the person was added successfully, an error message otherwise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_person_confirmation(id, first_name, last_name):
+    &#34;&#34;&#34;
+    Adds the person to the database, for the case where the user is asked which format is correct \n
+    Parameters
+    ----------
+    id: str
+        The id of the person
+    first_name: str
+        The first name of the person
+    last_name: str
+        The last name of the person
+    Returns
+    -------
+    tuple
+        The first element is True if the person was added successfully, False otherwise
+        The second element is None if the person was added successfully, an error message otherwise
+    &#34;&#34;&#34;
+    db_manager = DatabaseManager()
+    id = int(id)
+    if not db_manager.add_person(id, first_name, last_name):
+        return False, &#34;An error occurred while adding the person to the database!&#34;
+    return True, None</code></pre>
+</details>
+</dd>
+<dt id="validation.person_validation.add_person_validation"><code class="name flex">
+<span>def <span class="ident">add_person_validation</span></span>(<span>id, first_name, last_name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Validates the fields of the add person window and adds the person to the database </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>id</code></strong> :&ensp;<code>str</code></dt>
+<dd>The id of the person</dd>
+<dt><strong><code>first_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The first name of the person</dd>
+<dt><strong><code>last_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The last name of the person</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>The first element is True if the person was added successfully, False otherwise
+The second element is None if the person was added successfully, an error message otherwise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_person_validation(id, first_name, last_name):
+    &#34;&#34;&#34;
+    Validates the fields of the add person window and adds the person to the database \n
+    Parameters
+    ----------
+    id: str
+        The id of the person
+    first_name: str
+        The first name of the person
+    last_name: str
+        The last name of the person
+    Returns
+    -------
+    tuple
+        The first element is True if the person was added successfully, False otherwise
+        The second element is None if the person was added successfully, an error message otherwise
+    &#34;&#34;&#34;
+    message = None
+    if id == &#34;&#34; or first_name == &#34;&#34; or last_name == &#34;&#34;:
+        return False, &#34;All fields must be filled!&#34;
+    if not id.isdigit():
+        return False, &#34;Id must be a number!&#34;
+    if int(id) &lt;= 0 or int(id) &gt; 2147483647:
+        return False, &#34;The id is not within the limits!&#34;
+    result, msg = validate_name(first_name, &#34;first&#34;)
+    result2, msg2 = validate_name(last_name, &#34;last&#34;)
+    if not result or not result2:
+        if msg is not None:
+            return False, msg
+        else:
+            return False, msg2
+    db_manager = DatabaseManager()
+    id = int(id)
+    if not db_manager.search_id_db(id):
+        return False, &#34;There is already a person in the database with the given id!&#34;
+    first_name = first_name.strip()
+    last_name = last_name.strip()
+    first_name_formatted = format_name(first_name)
+    last_name_formatted = format_name(last_name)
+    if first_name_formatted[1:] != first_name[1:] or last_name_formatted[1:] != last_name[1:]:
+        message = first_name_formatted + &#34;!!&#34; + last_name_formatted
+    else:
+        if first_name_formatted[0] != first_name[0] or last_name_formatted[0] != last_name[0]:
+            message = &#34;The person was added to the database as &#34; + first_name_formatted + &#34; &#34; + last_name_formatted + \
+                      &#34;!&#34;
+        first_name = first_name_formatted
+        last_name = last_name_formatted
+        if not db_manager.add_person(id, first_name, last_name):
+            return False, &#34;An error occurred while adding the person to the database!&#34;
+    if message is None:
+        if not db_manager.add_person(id, first_name, last_name):
+            return False, &#34;An error occurred while adding the person to the database!&#34;
+    return True, message</code></pre>
+</details>
+</dd>
+<dt id="validation.person_validation.format_name"><code class="name flex">
+<span>def <span class="ident">format_name</span></span>(<span>name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>It formats the name to have the first letter of each word capitalized </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name to be formatted</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>The formatted name</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def format_name(name):
+    &#34;&#34;&#34;
+    It formats the name to have the first letter of each word capitalized \n
+    Parameters
+    ----------
+    name: str
+        The name to be formatted
+    Returns
+    -------
+    str
+        The formatted name
+    &#34;&#34;&#34;
+    new_name = name.strip()
+    new_name = new_name.lower()
+    formatted = &#34;&#34;
+    formatted += new_name[0].upper()
+    for i in range(1, len(new_name)):
+        if new_name[i - 1] == &#34;-&#34; or new_name[i - 1] == &#34;&#39;&#34; or new_name[i - 1] == &#34; &#34;:
+            formatted += new_name[i].upper()
+        else:
+            formatted += new_name[i]
+    parts = [part for part in formatted.replace(&#39;-&#39;, &#39; &#39;).split() if part.strip()]
+    formatted_name = &#39;-&#39;.join(parts)
+
+    parts = [part for part in formatted_name.replace(&#34;&#39;&#34;, &#39; &#39;).split() if part.strip()]
+    formatted_name = &#34;&#39;&#34;.join(parts)
+    return formatted_name</code></pre>
+</details>
+</dd>
+<dt id="validation.person_validation.validate_consecutive"><code class="name flex">
+<span>def <span class="ident">validate_consecutive</span></span>(<span>name, sep)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Validates that the name doesn't contain consecutive separators </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name to be validated</dd>
+<dt><strong><code>sep</code></strong> :&ensp;<code>str</code></dt>
+<dd>The separator</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True if the name is valid, False otherwise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_consecutive(name, sep):
+    &#34;&#34;&#34;
+    Validates that the name doesn&#39;t contain consecutive separators \n
+    Parameters
+    ----------
+    name: str
+        The name to be validated
+    sep: str
+        The separator
+    Returns
+    -------
+    bool
+        True if the name is valid, False otherwise
+    &#34;&#34;&#34;
+    parts = name.split(sep)
+    for part in parts:
+        if all(char.isspace() for char in part):
+            return False
+    return True</code></pre>
+</details>
+</dd>
+<dt id="validation.person_validation.validate_name"><code class="name flex">
+<span>def <span class="ident">validate_name</span></span>(<span>name, flag)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Validates the basic rules for a name. The name must contain only letters, spaces, dashes or apostrophes </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name to be validated</dd>
+<dt><strong><code>flag</code></strong> :&ensp;<code>str</code></dt>
+<dd>The flag that indicates if the name is first or last</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>The first element is True if the name is valid, False otherwise
+The second element is None if the name is valid, an error message otherwise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def validate_name(name, flag):
+    &#34;&#34;&#34;
+    Validates the basic rules for a name. The name must contain only letters, spaces, dashes or apostrophes \n
+    Parameters
+    ----------
+    name: str
+        The name to be validated
+    flag: str
+        The flag that indicates if the name is first or last
+    Returns
+    -------
+    tuple
+        The first element is True if the name is valid, False otherwise
+        The second element is None if the name is valid, an error message otherwise
+    &#34;&#34;&#34;
+    name = name.strip()
+    n_chr = [c for c in name if c.isalpha() or c == &#34; &#34; or c == &#34;-&#34; or c == &#34;&#39;&#34;]
+    name = name.strip()
+    if name.startswith(&#34;-&#34;) or name.endswith(&#34;-&#34;) or name.startswith(&#34;&#39;&#34;) or name.endswith(&#34;&#39;&#34;):
+        return False, f&#34;Invalid format for {flag} name!&#34;
+    if len(n_chr) != len(name):
+        return False, f&#34;{flag[0].upper() + flag[1:]} name has some invalid symbols!&#34;
+    if not validate_consecutive(name, &#34;-&#34;):
+        return False, f&#34;Invalid format for {flag} name!&#34;
+    if not validate_consecutive(name, &#34;&#39;&#34;):
+        return False, f&#34;Invalid format for {flag} name!&#34;
+    return True, None</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="validation" href="index.html">validation</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="validation.person_validation.add_person_confirmation" href="#validation.person_validation.add_person_confirmation">add_person_confirmation</a></code></li>
+<li><code><a title="validation.person_validation.add_person_validation" href="#validation.person_validation.add_person_validation">add_person_validation</a></code></li>
+<li><code><a title="validation.person_validation.format_name" href="#validation.person_validation.format_name">format_name</a></code></li>
+<li><code><a title="validation.person_validation.validate_consecutive" href="#validation.person_validation.validate_consecutive">validate_consecutive</a></code></li>
+<li><code><a title="validation.person_validation.validate_name" href="#validation.person_validation.validate_name">validate_name</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

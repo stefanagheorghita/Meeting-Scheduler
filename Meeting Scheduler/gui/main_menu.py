@@ -13,9 +13,15 @@ background_image = None
 
 
 def get_image_path(image_name):
-    """Returns the absolute path of the background image with the given name
-    :param image_name: The name of the image.
-    :return: The absolute path of the image.
+    """Returns the absolute path of the background image with the given name \n
+   Parameters
+    ----------
+    image_name : str
+        The name of the image
+    Returns
+    -------
+    str
+        The absolute path of the image
     """
     current_file_path = os.path.abspath(__file__)
     path_parts = current_file_path.split(os.sep)
@@ -27,9 +33,14 @@ def get_image_path(image_name):
 
 def background(root):
     """
-    Sets the background image of the given root window.
-    :param root:
-    :return:
+    Sets the background image of the given root window \n
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
     """
     global background_image
     width = root.winfo_screenwidth()
@@ -43,9 +54,14 @@ def background(root):
 
 def buttons(root):
     """
-    Places the buttons on the given root window (the main menu window).
-    :param root:
-    :return:
+    Places the buttons on the given root window (the main menu window) \n
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
     """
     frame = tk.Frame(root, bg="white", bd=5)
     frame.place(relx=0.5, rely=0.5, relwidth=0.6, relheight=0.7, anchor="center")
@@ -74,25 +90,39 @@ def buttons(root):
 
 
 def import_window(root):
+    """
+    Shows the import window \n
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
+    """
     file_path = filedialog.askopenfilename(title="Select File",
                                            filetypes=(("ICS files", "*.ics"),))
     if file_path:
         print("Selected file:", file_path)
         res, msg = import_events(file_path)
-        print(res, msg)
         if res:
             messagebox.showinfo("Success", "Import successful!")
         else:
-            messagebox.showerror("Error", msg)
+            messagebox.showerror("Error", "Import failed: " + str(msg))
     else:
         print("No file selected.")
 
 
 def redraw(root):
     """
-    Redraws the main menu window (it is needed when the user presses the back button).
-    :param root:
-    :return:
+    Redraws the main menu window (it is needed when the user presses the back button) \n
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
     """
     background(root)
     buttons(root)
@@ -101,8 +131,9 @@ def redraw(root):
 def menu_window():
     """
     Constructs the main menu window.
-    :param:
-    :return:
+    Returns
+    -------
+    None
     """
     root = tk.Tk()
     root.title("Meeting Scheduler")

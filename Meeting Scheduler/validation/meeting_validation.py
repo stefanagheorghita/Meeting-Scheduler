@@ -2,6 +2,28 @@ from datetime import timedelta, datetime
 
 
 def validate_meeting_search(start_date, end_date, start_hour, start_minute, end_hour, end_minute):
+    """
+    Validates the fields of the meeting \n
+    Parameters
+    ----------
+    start_date: datetime.datetime
+        The start date of the meeting
+    end_date: datetime.datetime
+        The end date of the meeting
+    start_hour: str
+        The start hour of the meeting
+    start_minute: str
+        The start minute of the meeting
+    end_hour: str
+        The end hour of the meeting
+    end_minute: str
+        The end minute of the meeting
+    Returns
+    -------
+    tuple
+        The first element is True if the meeting is valid, False otherwise
+        The second element is None if the meeting is valid, an error message otherwise
+    """
     if end_date < start_date:
         return False, "The start date must be before the end date!"
     elif end_date == start_date:
@@ -15,15 +37,28 @@ def validate_meeting_search(start_date, end_date, start_hour, start_minute, end_
 
 def validate_meeting_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name):
     """
-    Validates the fields of the meeting
-    :param start_date:
-    :param end_date:
-    :param start_hour:
-    :param start_minute:
-    :param end_hour:
-    :param end_minute:
-    :param name:
-    :return: (True, None) if the fields are valid, (False, error message) otherwise.
+    Validates the fields of the meeting \n
+    Parameters
+    ----------
+    start_date: datetime.datetime
+        The start date of the meeting
+    end_date: datetime.datetime
+        The end date of the meeting
+    start_hour: str
+        The start hour of the meeting
+    start_minute: str
+        The start minute of the meeting
+    end_hour: str
+        The end hour of the meeting
+    end_minute: str
+        The end minute of the meeting
+    name: str
+        The name of the meeting
+    Returns
+    -------
+    tuple
+        The first element is True if the meeting is valid, False otherwise
+        The second element is None if the meeting is valid, an error message otherwise
     """
     start_hour = int(start_hour)
     start_minute = int(start_minute)

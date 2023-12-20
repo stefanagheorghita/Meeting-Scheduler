@@ -6,9 +6,8 @@ from PIL import Image, ImageTk
 from tkcalendar import DateEntry
 
 from database.manager import DatabaseManager
-from validation.meeting_validation import validate_meeting_search
-
 from importing_exporting.export import export
+from validation.meeting_validation import validate_meeting_search
 
 background_image = None
 
@@ -20,9 +19,15 @@ def disable_edit(event):
 def show_search_results(rows, participants):
     """
     Shows the search results in a new window
-    :param rows:
-    :param participants:
-    :return:
+    Parameters
+    ----------
+    rows: list
+        A list of tuples containing the meeting information
+    participants: list
+        A list of lists containing the participants of each meeting
+    Returns
+    -------
+    None
     """
     result_window = tk.Toplevel()
     result_window.title("Meeting Search Results")
@@ -32,12 +37,15 @@ def show_search_results(rows, participants):
     result_text.tag_configure("red", foreground="red")
     result_text.tag_configure("green", foreground="green")
     result_text.tag_configure("blue", foreground="blue")
+    result_text.tag_configure("orange", foreground="orange")
     result_text.pack()
 
     meetings = []
     for i in range(len(rows)):
         result_text.insert(tk.END, "Meeting ID: ", "red")
         result_text.insert(tk.END, f"{rows[i][0]}\n")
+        result_text.insert(tk.END, "Meeting name: ", "orange")
+        result_text.insert(tk.END, f"{rows[i][3]}\n")
         result_text.insert(tk.END, "Start time: ", "blue")
         result_text.insert(tk.END, f"{rows[i][1]}\n")
         result_text.insert(tk.END, "End time: ", "blue")
@@ -45,11 +53,12 @@ def show_search_results(rows, participants):
         result_text.insert(tk.END, "Participants:\n", "green")
         for participant in participants[i]:
             result_text.insert(tk.END, f"{participant[1]} {participant[2]}\n")
-        meetings.append((rows[i][0], rows[i][1], rows[i][2], participants[i]))
+        meetings.append((rows[i][0], rows[i][1], rows[i][2], rows[i][3], participants[i]))
     result_text.config(state=tk.DISABLED)
     result_text.pack(fill="both", expand=True)
 
-    export_button = tk.Button(result_window, text="Export", command=lambda: export(False,meetings), bg="#FF9999", fg="white",
+    export_button = tk.Button(result_window, text="Export", command=lambda: export(False, meetings), bg="#FF9999",
+                              fg="white",
                               font=("Arial", 12, "bold"))
     export_button.pack()
 
@@ -59,13 +68,23 @@ def search(start_date_entry, end_date_entry, start_hour_combo,
            end_minute_combo):
     """
     Searches for meetings in the given interval
-    :param start_date_entry:
-    :param end_date_entry:
-    :param start_hour_combo:
-    :param start_minute_combo:
-    :param end_hour_combo:
-    :param end_minute_combo:
-    :return:
+    Parameters
+    ----------
+    start_date_entry: DateEntry
+        The start date of the interval
+    end_date_entry: DateEntry
+        The end date of the interval
+    start_hour_combo: tk.Combobox
+        The start hour of the interval
+    start_minute_combo: tk.Combobox
+        The start minute of the interval
+    end_hour_combo: tk.Combobox
+        The end hour of the interval
+    end_minute_combo: tk.Combobox
+        The end minute of the interval
+    Returns
+    -------
+    None
     """
     start_date = start_date_entry.get_date()
     end_date = end_date_entry.get_date()
@@ -99,9 +118,14 @@ def search(start_date_entry, end_date_entry, start_hour_combo,
 
 def background(root):
     """
-    Sets the background image of the given root window.
-    :param root:
-    :return:
+    Sets the background image of the given root window \n
+   Parameters
+    ----------
+    root: Tk
+        The root window
+    Returns
+    -------
+    None
     """
     global background_image
     width = root.winfo_screenwidth()
@@ -115,14 +139,25 @@ def background(root):
 
 def search_meeting_screen(root):
     """
-    Shows the search meeting screen.
-    :param root:
-    :return:
+    Shows the search meeting screen \n
+    Parameters
+    ----------
+    root: Tk
+        The root window
+    Returns
+    -------
+    None
     """
     for widget in root.winfo_children():
         widget.pack_forget()
 
     def back_btn_func():
+        """
+        Returns to the main menu \n
+        Returns
+        -------
+
+        """
         from gui.main_menu import redraw
         redraw(root)
 

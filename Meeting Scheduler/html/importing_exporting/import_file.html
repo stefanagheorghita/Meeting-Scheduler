@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>importing_exporting.import_file API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>importing_exporting.import_file</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from datetime import datetime
+from tkinter import messagebox
+
+from icalendar import Calendar
+
+from database.manager import DatabaseManager
+from validation.importing_validation import validate_meeting_to_import, validate_with_existing_meetings
+from validation.importing_validation import verify_events
+
+
+def transform(events):
+    &#34;&#34;&#34;
+    Transforms the events to the format required by the database \n
+    Parameters
+    ----------
+    events: list
+        The events to be transformed
+    Returns
+    -------
+    tuple
+        The first element is True if the events were transformed successfully, False otherwise
+        The second element is the transformed events if the first element is True, error message otherwise
+    &#34;&#34;&#34;
+    events_for_db = []
+    for event in events:
+        event_for_db = {&#34;name&#34;: event.get(&#34;summary&#34;).to_ical().decode(&#39;utf-8&#39;), &#34;start_time&#34;: event.get(&#34;start_time&#34;),
+                        &#34;end_time&#34;: event.get(&#34;end_time&#34;)}
+        if event_for_db[&#34;name&#34;] is None or event_for_db[&#34;name&#34;] == &#34;&#34;:
+            event_for_db[&#34;name&#34;] = &#34;Meeting&#34;
+        participants = []
+        current_time = datetime.now()
+        current_timezone = current_time.astimezone().tzinfo
+        offset = current_timezone.utcoffset(current_time)
+        time_str = event_for_db[&#34;start_time&#34;].strftime(
+            &#34;%Y-%m-%d %H:%M:%S&#34;) + f&#34;+{offset.seconds // 3600:02d}:{(offset.seconds % 3600) // 60:02d}&#34;
+        event_for_db[&#34;start_time&#34;] = datetime.strptime(time_str, &#34;%Y-%m-%d %H:%M:%S%z&#34;)
+        time_str = event_for_db[&#34;end_time&#34;].strftime(
+            &#34;%Y-%m-%d %H:%M:%S&#34;) + f&#34;+{offset.seconds // 3600:02d}:{(offset.seconds % 3600) // 60:02d}&#34;
+        event_for_db[&#34;end_time&#34;] = datetime.strptime(time_str, &#34;%Y-%m-%d %H:%M:%S%z&#34;)
+        for attendee in event.get(&#34;attendees&#34;):
+            parts = attendee.split(&#34;;&#34;)
+            name_part = parts[0]
+            name = name_part.split(&#34;=&#34;)[-1]
+            print(name)
+            last_name = name.split(&#34; &#34;)[-1]
+            first_name = &#34; &#34;.join(name.split(&#34; &#34;)[:-1])
+            if len(parts) == 1 or parts[1] == &#34;&#34; or not parts[1].startswith(&#34;X-ID&#34;):
+                participants.append({&#34;first_name&#34;: first_name, &#34;last_name&#34;: last_name})
+                continue
+            id_part = parts[1]
+            id = id_part.split(&#34;=&#34;)[-1]
+            try:
+                id = int(id)
+            except ValueError:
+                continue
+            participants.append({&#34;first_name&#34;: first_name, &#34;last_name&#34;: last_name, &#34;id&#34;: id})
+        event_for_db[&#34;participants&#34;] = participants
+        events_for_db.append(event_for_db)
+        start_date = event_for_db[&#34;start_time&#34;].date()
+        end_date = event_for_db[&#34;end_time&#34;].date()
+        start_hour = event_for_db[&#34;start_time&#34;].hour
+        start_minute = event_for_db[&#34;start_time&#34;].minute
+        end_hour = event_for_db[&#34;end_time&#34;].hour
+        end_minute = event_for_db[&#34;end_time&#34;].minute
+        res, msg = validate_meeting_to_import(start_date, end_date, start_hour, start_minute, end_hour, end_minute,
+                                              event_for_db[&#34;name&#34;])
+        if not res:
+            return False, msg
+    return True, events_for_db
+
+
+def add_not_existing_people(participants, all_people, db_manager):
+    &#34;&#34;&#34;
+    Adds the people that are not in the database \n
+    Parameters
+    ----------
+    participants: list
+        The participants to be added
+    all_people: list
+        All the people in the database
+    db_manager: DatabaseManager
+        The database manager
+    Returns
+    -------
+    list
+    &#34;&#34;&#34;
+    added_people = []
+    for participant in participants:
+        print(participant)
+        sorted_ids = sorted([person[0] for person in all_people])
+        id = 0
+        num = 1
+        while id == 0:
+            if num not in sorted_ids and num not in added_people:
+                id = num
+            num += 1
+        if &#34;id&#34; in participant.keys():
+            added = False
+            for person in all_people:
+                if person[0] == participant[&#34;id&#34;]:
+                    if person[1] == participant[&#34;first_name&#34;] and person[2] == participant[&#34;last_name&#34;]:
+                        added = True
+                        break
+                    else:
+                        question = f&#34;There is already a person with ID {person[0]}:\n&#34; \
+                                   f&#34;Existing Person: {person[1]} {person[2]}\n&#34; \
+                                   f&#34;Person from imported file: {participant[&#39;first_name&#39;]} {participant[&#39;last_name&#39;]}&#34;\
+                                   &#34;\n&#34; \
+                                   &#34;Select yes if you want to add the person from the imported file&#34; \
+                                   &#34; with a new ID or no if you want to &#34; \
+                                   &#34;replace the existing person.&#34;
+                        response = messagebox.askquestion(&#34;ID Conflict&#34;, question, icon=&#39;warning&#39;)
+                        added = True
+                        if response == &#39;yes&#39;:
+                            res = db_manager.add_person(id, participant[&#34;first_name&#34;], participant[&#34;last_name&#34;])
+                            if not res:
+                                messagebox.showerror(&#34;Error&#34;,
+                                                     &#34;There was an error while adding the person to the database!&#34;)
+                            else:
+                                added_people.append(id)
+                                participant[&#34;id&#34;] = id
+                        else:
+                            res = db_manager.update_person(participant[&#34;id&#34;], participant[&#34;first_name&#34;],
+                                                           participant[&#34;last_name&#34;])
+                            if not res:
+                                messagebox.showerror(&#34;Error&#34;,
+                                                     &#34;There was an error while updating the person in the database!&#34;)
+            if not added:
+                res = db_manager.add_person(participant[&#34;id&#34;], participant[&#34;first_name&#34;], participant[&#34;last_name&#34;])
+                if not res:
+                    messagebox.showerror(&#34;Error&#34;, &#34;There was an error while adding the person to the database!&#34;)
+
+        else:
+            res = db_manager.add_person(id, participant[&#34;first_name&#34;], participant[&#34;last_name&#34;])
+            if not res:
+                messagebox.showerror(&#34;Error&#34;, &#34;There was an error while adding the person to the database!&#34;)
+            else:
+                participant[&#34;id&#34;] = id
+                added_people.append(id)
+    return participants
+
+
+def modify_participants(participants):
+    &#34;&#34;&#34;
+    Modifies the participants list to be in the format required by the database \n
+    Parameters
+    ----------
+    participants: list
+        The participants to be modified
+    Returns
+    -------
+    list
+        Modified participants
+    &#34;&#34;&#34;
+    modified_participants = []
+    for participant in participants:
+        modified_participants.append((participant[&#34;id&#34;], participant[&#34;first_name&#34;], participant[&#34;last_name&#34;]))
+    return modified_participants
+
+
+def import_events(file_path):
+    &#34;&#34;&#34;
+    Imports the events from the given file
+    Parameters
+    ----------
+    file_path: str
+        The path to the file
+    Returns
+    -------
+    tuple
+        The first element is True if the events were imported successfully, False otherwise
+        The second element is the error message if the first element is False, None otherwise
+    &#34;&#34;&#34;
+    if not file_path.endswith(&#34;.ics&#34;):
+        return False, &#34;The file must be a .ics file&#34;
+    try:
+        with open(file_path, &#39;rb&#39;) as file:
+            cal = Calendar.from_ical(file.read())
+
+            events = []
+            for component in cal.walk():
+                if component.name == &#34;VEVENT&#34;:
+                    event = {
+                        &#34;uid&#34;: component.get(&#39;uid&#39;),
+                        &#34;summary&#34;: component.get(&#39;summary&#39;, &#34;&#34;),
+                        &#34;start_time&#34;: component.get(&#39;dtstart&#39;).dt if component.get(&#39;dtstart&#39;) else None,
+                        &#34;end_time&#34;: component.get(&#39;dtend&#39;).dt if component.get(&#39;dtend&#39;) else None,
+                        &#34;description&#34;: component.get(&#39;description&#39;, &#34;&#34;),
+                        &#34;attendees&#34;: component.get(&#39;ATTENDEE&#39;, []),
+                    }
+                    ok = True
+                    if len(event[&#34;attendees&#34;]) != 0:
+                        for attendee in event[&#34;attendees&#34;]:
+                            if not attendee.startswith(&#34;CN=&#34;):
+                                ok = False
+                                break
+                        if not ok:
+                            attend = &#34;&#34;
+                            for i in event[&#34;attendees&#34;]:
+                                attend += i
+                            event[&#34;attendees&#34;] = [attend]
+                    events.append(event)
+            res, msg = verify_events(events)
+            if not res:
+                return False, msg
+            else:
+                res, msg = transform(events)
+                if not res:
+                    return False, msg
+                else:
+                    transformed_events = msg
+                    db_manager = DatabaseManager()
+                    for event in transformed_events:
+                        all_people = db_manager.find_all_persons()
+                        participants = add_not_existing_people(event[&#34;participants&#34;], all_people, db_manager)
+                        event[&#34;participants&#34;] = participants
+                        val, new_ev = validate_with_existing_meetings(event, db_manager)
+                        participants = modify_participants(participants)
+                        if not val:
+                            if new_ev is None:
+                                messagebox.showinfo(&#34;Info&#34;,
+                                                    f&#34;The meeting {event[&#39;name&#39;]} is the same as an existing meeting!&#34;
+                                                    &#34; It will not be added to the database!&#34;)
+                            else:
+                                meetings_to_update = new_ev
+                                message = f&#34;{event[&#39;name&#39;]}: There is a meetings with the same name and the same &#34; \
+                                          &#34;period of time whose list of participants &#34; \
+                                          &#34;includes or is included in this meeting&#39;s participants.&#34; \
+                                          &#34;Choose yes if you want to update the existing meeting&#34; \
+                                          &#34; with the new participants or no if you want to keep&#34; \
+                                          &#34; the existing version.&#34;
+                                response = messagebox.askquestion(&#34;Common Participants&#34;, message, icon=&#39;warning&#39;)
+                                if response == &#39;yes&#39;:
+                                    res = db_manager.update_meetings(meetings_to_update, participants)
+                                    if not res:
+                                        return False, &#34;There was an error while updating the meeting in the database!&#34;
+                                elif response == &#39;no&#39;:
+                                    continue
+
+                        else:
+                            common_participants = new_ev
+                            if len(common_participants) == 0:
+                                res = db_manager.add_meeting(event[&#34;start_time&#34;], event[&#34;end_time&#34;], participants,
+                                                             event[&#34;name&#34;])
+                                if not res:
+                                    return False, &#34;There was an error while adding a meeting to the database!&#34;
+                            else:
+                                message = f&#34;The meeting {event[&#39;name&#39;]} has {len(common_participants)} &#34; \
+                                          f&#34;common participants with meetings that happen at the same time:\n&#34;
+                                for participant in common_participants:
+                                    message += f&#34;{participant[0]} - {participant[1]} {participant[2]}\n&#34;
+                                message += &#34;Do you want to add the meeting anyway?&#34;
+                                response = messagebox.askquestion(&#34;Common Participants&#34;, message, icon=&#39;warning&#39;)
+                                if response == &#39;yes&#39;:
+                                    res = db_manager.add_meeting(event[&#34;start_time&#34;], event[&#34;end_time&#34;], participants,
+                                                                 event[&#34;name&#34;])
+                                    if not res:
+                                        return False, &#34;There was an error while adding a meeting to the database!&#34;
+                                else:
+                                    continue
+                    return True, None
+    except FileNotFoundError:
+        return False, &#34;The file does not exist!&#34;
+    except ValueError as ve:
+        return False, &#34;The file is not a valid .ics file!&#34;
+    except Exception as e:
+        return False, e</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="importing_exporting.import_file.add_not_existing_people"><code class="name flex">
+<span>def <span class="ident">add_not_existing_people</span></span>(<span>participants, all_people, db_manager)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Adds the people that are not in the database </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>participants</code></strong> :&ensp;<code>list</code></dt>
+<dd>The participants to be added</dd>
+<dt><strong><code>all_people</code></strong> :&ensp;<code>list</code></dt>
+<dd>All the people in the database</dd>
+<dt><strong><code>db_manager</code></strong> :&ensp;<code>DatabaseManager</code></dt>
+<dd>The database manager</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_not_existing_people(participants, all_people, db_manager):
+    &#34;&#34;&#34;
+    Adds the people that are not in the database \n
+    Parameters
+    ----------
+    participants: list
+        The participants to be added
+    all_people: list
+        All the people in the database
+    db_manager: DatabaseManager
+        The database manager
+    Returns
+    -------
+    list
+    &#34;&#34;&#34;
+    added_people = []
+    for participant in participants:
+        print(participant)
+        sorted_ids = sorted([person[0] for person in all_people])
+        id = 0
+        num = 1
+        while id == 0:
+            if num not in sorted_ids and num not in added_people:
+                id = num
+            num += 1
+        if &#34;id&#34; in participant.keys():
+            added = False
+            for person in all_people:
+                if person[0] == participant[&#34;id&#34;]:
+                    if person[1] == participant[&#34;first_name&#34;] and person[2] == participant[&#34;last_name&#34;]:
+                        added = True
+                        break
+                    else:
+                        question = f&#34;There is already a person with ID {person[0]}:\n&#34; \
+                                   f&#34;Existing Person: {person[1]} {person[2]}\n&#34; \
+                                   f&#34;Person from imported file: {participant[&#39;first_name&#39;]} {participant[&#39;last_name&#39;]}&#34;\
+                                   &#34;\n&#34; \
+                                   &#34;Select yes if you want to add the person from the imported file&#34; \
+                                   &#34; with a new ID or no if you want to &#34; \
+                                   &#34;replace the existing person.&#34;
+                        response = messagebox.askquestion(&#34;ID Conflict&#34;, question, icon=&#39;warning&#39;)
+                        added = True
+                        if response == &#39;yes&#39;:
+                            res = db_manager.add_person(id, participant[&#34;first_name&#34;], participant[&#34;last_name&#34;])
+                            if not res:
+                                messagebox.showerror(&#34;Error&#34;,
+                                                     &#34;There was an error while adding the person to the database!&#34;)
+                            else:
+                                added_people.append(id)
+                                participant[&#34;id&#34;] = id
+                        else:
+                            res = db_manager.update_person(participant[&#34;id&#34;], participant[&#34;first_name&#34;],
+                                                           participant[&#34;last_name&#34;])
+                            if not res:
+                                messagebox.showerror(&#34;Error&#34;,
+                                                     &#34;There was an error while updating the person in the database!&#34;)
+            if not added:
+                res = db_manager.add_person(participant[&#34;id&#34;], participant[&#34;first_name&#34;], participant[&#34;last_name&#34;])
+                if not res:
+                    messagebox.showerror(&#34;Error&#34;, &#34;There was an error while adding the person to the database!&#34;)
+
+        else:
+            res = db_manager.add_person(id, participant[&#34;first_name&#34;], participant[&#34;last_name&#34;])
+            if not res:
+                messagebox.showerror(&#34;Error&#34;, &#34;There was an error while adding the person to the database!&#34;)
+            else:
+                participant[&#34;id&#34;] = id
+                added_people.append(id)
+    return participants</code></pre>
+</details>
+</dd>
+<dt id="importing_exporting.import_file.import_events"><code class="name flex">
+<span>def <span class="ident">import_events</span></span>(<span>file_path)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Imports the events from the given file
+Parameters</p>
+<hr>
+<dl>
+<dt><strong><code>file_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>The path to the file</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>The first element is True if the events were imported successfully, False otherwise
+The second element is the error message if the first element is False, None otherwise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def import_events(file_path):
+    &#34;&#34;&#34;
+    Imports the events from the given file
+    Parameters
+    ----------
+    file_path: str
+        The path to the file
+    Returns
+    -------
+    tuple
+        The first element is True if the events were imported successfully, False otherwise
+        The second element is the error message if the first element is False, None otherwise
+    &#34;&#34;&#34;
+    if not file_path.endswith(&#34;.ics&#34;):
+        return False, &#34;The file must be a .ics file&#34;
+    try:
+        with open(file_path, &#39;rb&#39;) as file:
+            cal = Calendar.from_ical(file.read())
+
+            events = []
+            for component in cal.walk():
+                if component.name == &#34;VEVENT&#34;:
+                    event = {
+                        &#34;uid&#34;: component.get(&#39;uid&#39;),
+                        &#34;summary&#34;: component.get(&#39;summary&#39;, &#34;&#34;),
+                        &#34;start_time&#34;: component.get(&#39;dtstart&#39;).dt if component.get(&#39;dtstart&#39;) else None,
+                        &#34;end_time&#34;: component.get(&#39;dtend&#39;).dt if component.get(&#39;dtend&#39;) else None,
+                        &#34;description&#34;: component.get(&#39;description&#39;, &#34;&#34;),
+                        &#34;attendees&#34;: component.get(&#39;ATTENDEE&#39;, []),
+                    }
+                    ok = True
+                    if len(event[&#34;attendees&#34;]) != 0:
+                        for attendee in event[&#34;attendees&#34;]:
+                            if not attendee.startswith(&#34;CN=&#34;):
+                                ok = False
+                                break
+                        if not ok:
+                            attend = &#34;&#34;
+                            for i in event[&#34;attendees&#34;]:
+                                attend += i
+                            event[&#34;attendees&#34;] = [attend]
+                    events.append(event)
+            res, msg = verify_events(events)
+            if not res:
+                return False, msg
+            else:
+                res, msg = transform(events)
+                if not res:
+                    return False, msg
+                else:
+                    transformed_events = msg
+                    db_manager = DatabaseManager()
+                    for event in transformed_events:
+                        all_people = db_manager.find_all_persons()
+                        participants = add_not_existing_people(event[&#34;participants&#34;], all_people, db_manager)
+                        event[&#34;participants&#34;] = participants
+                        val, new_ev = validate_with_existing_meetings(event, db_manager)
+                        participants = modify_participants(participants)
+                        if not val:
+                            if new_ev is None:
+                                messagebox.showinfo(&#34;Info&#34;,
+                                                    f&#34;The meeting {event[&#39;name&#39;]} is the same as an existing meeting!&#34;
+                                                    &#34; It will not be added to the database!&#34;)
+                            else:
+                                meetings_to_update = new_ev
+                                message = f&#34;{event[&#39;name&#39;]}: There is a meetings with the same name and the same &#34; \
+                                          &#34;period of time whose list of participants &#34; \
+                                          &#34;includes or is included in this meeting&#39;s participants.&#34; \
+                                          &#34;Choose yes if you want to update the existing meeting&#34; \
+                                          &#34; with the new participants or no if you want to keep&#34; \
+                                          &#34; the existing version.&#34;
+                                response = messagebox.askquestion(&#34;Common Participants&#34;, message, icon=&#39;warning&#39;)
+                                if response == &#39;yes&#39;:
+                                    res = db_manager.update_meetings(meetings_to_update, participants)
+                                    if not res:
+                                        return False, &#34;There was an error while updating the meeting in the database!&#34;
+                                elif response == &#39;no&#39;:
+                                    continue
+
+                        else:
+                            common_participants = new_ev
+                            if len(common_participants) == 0:
+                                res = db_manager.add_meeting(event[&#34;start_time&#34;], event[&#34;end_time&#34;], participants,
+                                                             event[&#34;name&#34;])
+                                if not res:
+                                    return False, &#34;There was an error while adding a meeting to the database!&#34;
+                            else:
+                                message = f&#34;The meeting {event[&#39;name&#39;]} has {len(common_participants)} &#34; \
+                                          f&#34;common participants with meetings that happen at the same time:\n&#34;
+                                for participant in common_participants:
+                                    message += f&#34;{participant[0]} - {participant[1]} {participant[2]}\n&#34;
+                                message += &#34;Do you want to add the meeting anyway?&#34;
+                                response = messagebox.askquestion(&#34;Common Participants&#34;, message, icon=&#39;warning&#39;)
+                                if response == &#39;yes&#39;:
+                                    res = db_manager.add_meeting(event[&#34;start_time&#34;], event[&#34;end_time&#34;], participants,
+                                                                 event[&#34;name&#34;])
+                                    if not res:
+                                        return False, &#34;There was an error while adding a meeting to the database!&#34;
+                                else:
+                                    continue
+                    return True, None
+    except FileNotFoundError:
+        return False, &#34;The file does not exist!&#34;
+    except ValueError as ve:
+        return False, &#34;The file is not a valid .ics file!&#34;
+    except Exception as e:
+        return False, e</code></pre>
+</details>
+</dd>
+<dt id="importing_exporting.import_file.modify_participants"><code class="name flex">
+<span>def <span class="ident">modify_participants</span></span>(<span>participants)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Modifies the participants list to be in the format required by the database </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>participants</code></strong> :&ensp;<code>list</code></dt>
+<dd>The participants to be modified</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>Modified participants</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def modify_participants(participants):
+    &#34;&#34;&#34;
+    Modifies the participants list to be in the format required by the database \n
+    Parameters
+    ----------
+    participants: list
+        The participants to be modified
+    Returns
+    -------
+    list
+        Modified participants
+    &#34;&#34;&#34;
+    modified_participants = []
+    for participant in participants:
+        modified_participants.append((participant[&#34;id&#34;], participant[&#34;first_name&#34;], participant[&#34;last_name&#34;]))
+    return modified_participants</code></pre>
+</details>
+</dd>
+<dt id="importing_exporting.import_file.transform"><code class="name flex">
+<span>def <span class="ident">transform</span></span>(<span>events)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Transforms the events to the format required by the database </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>events</code></strong> :&ensp;<code>list</code></dt>
+<dd>The events to be transformed</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>tuple</code></dt>
+<dd>The first element is True if the events were transformed successfully, False otherwise
+The second element is the transformed events if the first element is True, error message otherwise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def transform(events):
+    &#34;&#34;&#34;
+    Transforms the events to the format required by the database \n
+    Parameters
+    ----------
+    events: list
+        The events to be transformed
+    Returns
+    -------
+    tuple
+        The first element is True if the events were transformed successfully, False otherwise
+        The second element is the transformed events if the first element is True, error message otherwise
+    &#34;&#34;&#34;
+    events_for_db = []
+    for event in events:
+        event_for_db = {&#34;name&#34;: event.get(&#34;summary&#34;).to_ical().decode(&#39;utf-8&#39;), &#34;start_time&#34;: event.get(&#34;start_time&#34;),
+                        &#34;end_time&#34;: event.get(&#34;end_time&#34;)}
+        if event_for_db[&#34;name&#34;] is None or event_for_db[&#34;name&#34;] == &#34;&#34;:
+            event_for_db[&#34;name&#34;] = &#34;Meeting&#34;
+        participants = []
+        current_time = datetime.now()
+        current_timezone = current_time.astimezone().tzinfo
+        offset = current_timezone.utcoffset(current_time)
+        time_str = event_for_db[&#34;start_time&#34;].strftime(
+            &#34;%Y-%m-%d %H:%M:%S&#34;) + f&#34;+{offset.seconds // 3600:02d}:{(offset.seconds % 3600) // 60:02d}&#34;
+        event_for_db[&#34;start_time&#34;] = datetime.strptime(time_str, &#34;%Y-%m-%d %H:%M:%S%z&#34;)
+        time_str = event_for_db[&#34;end_time&#34;].strftime(
+            &#34;%Y-%m-%d %H:%M:%S&#34;) + f&#34;+{offset.seconds // 3600:02d}:{(offset.seconds % 3600) // 60:02d}&#34;
+        event_for_db[&#34;end_time&#34;] = datetime.strptime(time_str, &#34;%Y-%m-%d %H:%M:%S%z&#34;)
+        for attendee in event.get(&#34;attendees&#34;):
+            parts = attendee.split(&#34;;&#34;)
+            name_part = parts[0]
+            name = name_part.split(&#34;=&#34;)[-1]
+            print(name)
+            last_name = name.split(&#34; &#34;)[-1]
+            first_name = &#34; &#34;.join(name.split(&#34; &#34;)[:-1])
+            if len(parts) == 1 or parts[1] == &#34;&#34; or not parts[1].startswith(&#34;X-ID&#34;):
+                participants.append({&#34;first_name&#34;: first_name, &#34;last_name&#34;: last_name})
+                continue
+            id_part = parts[1]
+            id = id_part.split(&#34;=&#34;)[-1]
+            try:
+                id = int(id)
+            except ValueError:
+                continue
+            participants.append({&#34;first_name&#34;: first_name, &#34;last_name&#34;: last_name, &#34;id&#34;: id})
+        event_for_db[&#34;participants&#34;] = participants
+        events_for_db.append(event_for_db)
+        start_date = event_for_db[&#34;start_time&#34;].date()
+        end_date = event_for_db[&#34;end_time&#34;].date()
+        start_hour = event_for_db[&#34;start_time&#34;].hour
+        start_minute = event_for_db[&#34;start_time&#34;].minute
+        end_hour = event_for_db[&#34;end_time&#34;].hour
+        end_minute = event_for_db[&#34;end_time&#34;].minute
+        res, msg = validate_meeting_to_import(start_date, end_date, start_hour, start_minute, end_hour, end_minute,
+                                              event_for_db[&#34;name&#34;])
+        if not res:
+            return False, msg
+    return True, events_for_db</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="importing_exporting" href="index.html">importing_exporting</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="importing_exporting.import_file.add_not_existing_people" href="#importing_exporting.import_file.add_not_existing_people">add_not_existing_people</a></code></li>
+<li><code><a title="importing_exporting.import_file.import_events" href="#importing_exporting.import_file.import_events">import_events</a></code></li>
+<li><code><a title="importing_exporting.import_file.modify_participants" href="#importing_exporting.import_file.modify_participants">modify_participants</a></code></li>
+<li><code><a title="importing_exporting.import_file.transform" href="#importing_exporting.import_file.transform">transform</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

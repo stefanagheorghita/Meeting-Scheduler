@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>gui.search_meeting API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>gui.search_meeting</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import tkinter as tk
+from datetime import datetime, time
+from tkinter import ttk, messagebox
+
+from PIL import Image, ImageTk
+from tkcalendar import DateEntry
+
+from database.manager import DatabaseManager
+from importing_exporting.export import export
+from validation.meeting_validation import validate_meeting_search
+
+background_image = None
+
+
+def disable_edit(event):
+    return &#34;break&#34;
+
+
+def show_search_results(rows, participants):
+    &#34;&#34;&#34;
+    Shows the search results in a new window
+    Parameters
+    ----------
+    rows: list
+        A list of tuples containing the meeting information
+    participants: list
+        A list of lists containing the participants of each meeting
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    result_window = tk.Toplevel()
+    result_window.title(&#34;Meeting Search Results&#34;)
+
+    result_text = tk.Text(result_window, height=20, width=50)
+    result_text.tag_configure(&#34;bold&#34;, font=(&#34;Arial&#34;, 10, &#34;bold&#34;))
+    result_text.tag_configure(&#34;red&#34;, foreground=&#34;red&#34;)
+    result_text.tag_configure(&#34;green&#34;, foreground=&#34;green&#34;)
+    result_text.tag_configure(&#34;blue&#34;, foreground=&#34;blue&#34;)
+    result_text.tag_configure(&#34;orange&#34;, foreground=&#34;orange&#34;)
+    result_text.pack()
+
+    meetings = []
+    for i in range(len(rows)):
+        result_text.insert(tk.END, &#34;Meeting ID: &#34;, &#34;red&#34;)
+        result_text.insert(tk.END, f&#34;{rows[i][0]}\n&#34;)
+        result_text.insert(tk.END, &#34;Meeting name: &#34;, &#34;orange&#34;)
+        result_text.insert(tk.END, f&#34;{rows[i][3]}\n&#34;)
+        result_text.insert(tk.END, &#34;Start time: &#34;, &#34;blue&#34;)
+        result_text.insert(tk.END, f&#34;{rows[i][1]}\n&#34;)
+        result_text.insert(tk.END, &#34;End time: &#34;, &#34;blue&#34;)
+        result_text.insert(tk.END, f&#34;{rows[i][2]}\n&#34;)
+        result_text.insert(tk.END, &#34;Participants:\n&#34;, &#34;green&#34;)
+        for participant in participants[i]:
+            result_text.insert(tk.END, f&#34;{participant[1]} {participant[2]}\n&#34;)
+        meetings.append((rows[i][0], rows[i][1], rows[i][2], rows[i][3], participants[i]))
+    result_text.config(state=tk.DISABLED)
+    result_text.pack(fill=&#34;both&#34;, expand=True)
+
+    export_button = tk.Button(result_window, text=&#34;Export&#34;, command=lambda: export(False, meetings), bg=&#34;#FF9999&#34;,
+                              fg=&#34;white&#34;,
+                              font=(&#34;Arial&#34;, 12, &#34;bold&#34;))
+    export_button.pack()
+
+
+def search(start_date_entry, end_date_entry, start_hour_combo,
+           start_minute_combo, end_hour_combo,
+           end_minute_combo):
+    &#34;&#34;&#34;
+    Searches for meetings in the given interval
+    Parameters
+    ----------
+    start_date_entry: DateEntry
+        The start date of the interval
+    end_date_entry: DateEntry
+        The end date of the interval
+    start_hour_combo: tk.Combobox
+        The start hour of the interval
+    start_minute_combo: tk.Combobox
+        The start minute of the interval
+    end_hour_combo: tk.Combobox
+        The end hour of the interval
+    end_minute_combo: tk.Combobox
+        The end minute of the interval
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    start_date = start_date_entry.get_date()
+    end_date = end_date_entry.get_date()
+    start_hour = start_hour_combo.get()
+    start_minute = start_minute_combo.get()
+    end_hour = end_hour_combo.get()
+    end_minute = end_minute_combo.get()
+    res, msg = validate_meeting_search(start_date, end_date, start_hour, start_minute, end_hour, end_minute)
+    db_manager = DatabaseManager()
+    start_time = datetime.combine(start_date, time(int(start_hour), int(start_minute)))
+    end_time = datetime.combine(end_date, time(int(end_hour), int(end_minute)))
+    all_participants = []
+    if res:
+        meetings = db_manager.search_meetings(start_time, end_time)
+        if meetings is None:
+            messagebox.showerror(&#34;Error&#34;, &#34;An error occurred while searching for meetings!&#34;)
+        else:
+            if len(meetings) == 0:
+                messagebox.showinfo(&#34;Info&#34;, &#34;No meetings were found!&#34;)
+                return
+            for meeting in meetings:
+                participants = db_manager.get_participants(meeting[0])
+                if participants is None:
+                    messagebox.showerror(&#34;Error&#34;, &#34;An error occurred while searching for participants!&#34;)
+                    return
+                all_participants.append(participants)
+            show_search_results(meetings, all_participants)
+    else:
+        messagebox.showinfo(&#34;Info&#34;, &#34;No meetings were found! The interval is invalid!&#34;)
+
+
+def background(root):
+    &#34;&#34;&#34;
+    Sets the background image of the given root window \n
+   Parameters
+    ----------
+    root: Tk
+        The root window
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    global background_image
+    width = root.winfo_screenwidth()
+    height = root.winfo_screenheight()
+    photo = Image.open(&#34;../images/search_meet.gif&#34;)
+    mod_img = photo.resize((width, height))
+    background_image = ImageTk.PhotoImage(mod_img)
+    background_label = tk.Label(root, image=background_image)
+    background_label.place(relx=0.5, rely=0.5, relheight=1, relwidth=1, anchor=&#34;center&#34;)
+
+
+def search_meeting_screen(root):
+    &#34;&#34;&#34;
+    Shows the search meeting screen \n
+    Parameters
+    ----------
+    root: Tk
+        The root window
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    for widget in root.winfo_children():
+        widget.pack_forget()
+
+    def back_btn_func():
+        &#34;&#34;&#34;
+        Returns to the main menu \n
+        Returns
+        -------
+
+        &#34;&#34;&#34;
+        from gui.main_menu import redraw
+        redraw(root)
+
+    background(root)
+
+    back_frame = tk.Frame(root)
+    back_frame.place(relx=0, rely=0, anchor=&#34;nw&#34;, width=60, height=30)
+    back_button = tk.Button(back_frame, text=&#34;\u2190 Back&#34;, command=back_btn_func, bg=&#34;#FF3333&#34;,
+                            activebackground=&#34;#CC0000&#34;, fg=&#34;white&#34;,
+                            font=(&#34;Arial&#34;, 10))
+    back_button.pack(fill=&#34;both&#34;, expand=True, padx=1, pady=1)
+
+    meeting_frame = tk.Frame(root, bg=&#34;white&#34;, borderwidth=1, relief=&#34;solid&#34;)
+    meeting_frame.place(relx=0.5, rely=0.5, anchor=&#34;center&#34;, relwidth=0.7, relheight=0.5)
+
+    start_date_label = ttk.Label(meeting_frame, text=&#34; Start Date:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                                 borderwidth=1, relief=&#34;solid&#34;)
+    start_date_label.grid(row=0, column=0, padx=10, pady=5, sticky=&#34;w&#34;)
+    start_date_entry = DateEntry(meeting_frame, font=(&#34;Arial&#34;, 12), background=&#39;darkblue&#39;, foreground=&#39;white&#39;,
+                                 borderwidth=2, date_pattern=&#39;dd/mm/yyyy&#39;)
+    start_date_entry.grid(row=0, column=1, padx=10, pady=5)
+    start_date_entry.bind(&#34;&lt;Key&gt;&#34;, disable_edit)
+
+    date_label = ttk.Label(meeting_frame, text=&#34;End Date:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12), borderwidth=1,
+                           relief=&#34;solid&#34;)
+    date_label.grid(row=1, column=0, padx=10, pady=5, sticky=&#34;w&#34;)
+    date_entry = DateEntry(meeting_frame, font=(&#34;Arial&#34;, 12), background=&#39;darkblue&#39;, foreground=&#39;white&#39;, borderwidth=2,
+                           date_pattern=&#39;dd/mm/yyyy&#39;)
+    date_entry.grid(row=1, column=1, padx=10, pady=5)
+    date_entry.bind(&#34;&lt;Key&gt;&#34;, disable_edit)
+
+    hours = [str(i).zfill(2) for i in range(24)]
+    minutes = [str(i).zfill(2) for i in range(60)]
+
+    start_time_label = ttk.Label(meeting_frame, text=&#34;Start Time:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                                 borderwidth=1, relief=&#34;solid&#34;)
+    start_time_label.grid(row=2, column=0, padx=10, pady=5, sticky=&#34;e&#34;)
+
+    start_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    start_hour_combo.grid(row=2, column=1, padx=5, pady=5)
+    start_hour_combo.set(&#34;00&#34;)
+
+    start_minute_label = ttk.Label(meeting_frame, text=&#34;:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12))
+    start_minute_label.grid(row=2, column=2, padx=5, pady=5)
+
+    start_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    start_minute_combo.grid(row=2, column=3, padx=5, pady=5)
+    start_minute_combo.set(&#34;00&#34;)
+
+    end_time_label = ttk.Label(meeting_frame, text=&#34;End Time:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12), borderwidth=1,
+                               relief=&#34;solid&#34;)
+    end_time_label.grid(row=3, column=0, padx=10, pady=5, sticky=&#34;e&#34;)
+
+    end_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    end_hour_combo.grid(row=3, column=1, padx=5, pady=5)
+    end_hour_combo.set(&#34;00&#34;)
+
+    end_minute_label = ttk.Label(meeting_frame, text=&#34;:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12))
+    end_minute_label.grid(row=3, column=2, padx=5, pady=5)
+
+    end_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    end_minute_combo.grid(row=3, column=3, padx=5, pady=5)
+    end_minute_combo.set(&#34;00&#34;)
+
+    search_button = ttk.Button(meeting_frame, text=&#34;Search&#34;,
+                               command=lambda: search(start_date_entry, date_entry, start_hour_combo,
+                                                      start_minute_combo, end_hour_combo,
+                                                      end_minute_combo),
+                               style=&#39;Button.TButton&#39;)
+    search_button.grid(row=5, columnspan=3, pady=20)
+
+    style = ttk.Style()
+    style.theme_use(&#34;alt&#34;)
+    style.configure(&#34;Button.TButton&#34;, foreground=&#34;white&#34;, background=&#34;#66CC66&#34;, font=(&#34;Arial&#34;, 12))
+    style.map(&#34;TButton&#34;, background=[(&#34;active&#34;, &#34;purple&#34;)])</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="gui.search_meeting.background"><code class="name flex">
+<span>def <span class="ident">background</span></span>(<span>root)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets the background image of the given root window </p>
+<p>Parameters</p>
+<hr>
+<p>root: Tk
+The root window
+Returns</p>
+<hr>
+<p>None</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def background(root):
+    &#34;&#34;&#34;
+    Sets the background image of the given root window \n
+   Parameters
+    ----------
+    root: Tk
+        The root window
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    global background_image
+    width = root.winfo_screenwidth()
+    height = root.winfo_screenheight()
+    photo = Image.open(&#34;../images/search_meet.gif&#34;)
+    mod_img = photo.resize((width, height))
+    background_image = ImageTk.PhotoImage(mod_img)
+    background_label = tk.Label(root, image=background_image)
+    background_label.place(relx=0.5, rely=0.5, relheight=1, relwidth=1, anchor=&#34;center&#34;)</code></pre>
+</details>
+</dd>
+<dt id="gui.search_meeting.disable_edit"><code class="name flex">
+<span>def <span class="ident">disable_edit</span></span>(<span>event)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def disable_edit(event):
+    return &#34;break&#34;</code></pre>
+</details>
+</dd>
+<dt id="gui.search_meeting.search"><code class="name flex">
+<span>def <span class="ident">search</span></span>(<span>start_date_entry, end_date_entry, start_hour_combo, start_minute_combo, end_hour_combo, end_minute_combo)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Searches for meetings in the given interval
+Parameters</p>
+<hr>
+<dl>
+<dt><strong><code>start_date_entry</code></strong> :&ensp;<code>DateEntry</code></dt>
+<dd>The start date of the interval</dd>
+<dt><strong><code>end_date_entry</code></strong> :&ensp;<code>DateEntry</code></dt>
+<dd>The end date of the interval</dd>
+<dt><strong><code>start_hour_combo</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dd>The start hour of the interval</dd>
+<dt><strong><code>start_minute_combo</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dd>The start minute of the interval</dd>
+<dt><strong><code>end_hour_combo</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dd>The end hour of the interval</dd>
+<dt><strong><code>end_minute_combo</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dd>The end minute of the interval</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def search(start_date_entry, end_date_entry, start_hour_combo,
+           start_minute_combo, end_hour_combo,
+           end_minute_combo):
+    &#34;&#34;&#34;
+    Searches for meetings in the given interval
+    Parameters
+    ----------
+    start_date_entry: DateEntry
+        The start date of the interval
+    end_date_entry: DateEntry
+        The end date of the interval
+    start_hour_combo: tk.Combobox
+        The start hour of the interval
+    start_minute_combo: tk.Combobox
+        The start minute of the interval
+    end_hour_combo: tk.Combobox
+        The end hour of the interval
+    end_minute_combo: tk.Combobox
+        The end minute of the interval
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    start_date = start_date_entry.get_date()
+    end_date = end_date_entry.get_date()
+    start_hour = start_hour_combo.get()
+    start_minute = start_minute_combo.get()
+    end_hour = end_hour_combo.get()
+    end_minute = end_minute_combo.get()
+    res, msg = validate_meeting_search(start_date, end_date, start_hour, start_minute, end_hour, end_minute)
+    db_manager = DatabaseManager()
+    start_time = datetime.combine(start_date, time(int(start_hour), int(start_minute)))
+    end_time = datetime.combine(end_date, time(int(end_hour), int(end_minute)))
+    all_participants = []
+    if res:
+        meetings = db_manager.search_meetings(start_time, end_time)
+        if meetings is None:
+            messagebox.showerror(&#34;Error&#34;, &#34;An error occurred while searching for meetings!&#34;)
+        else:
+            if len(meetings) == 0:
+                messagebox.showinfo(&#34;Info&#34;, &#34;No meetings were found!&#34;)
+                return
+            for meeting in meetings:
+                participants = db_manager.get_participants(meeting[0])
+                if participants is None:
+                    messagebox.showerror(&#34;Error&#34;, &#34;An error occurred while searching for participants!&#34;)
+                    return
+                all_participants.append(participants)
+            show_search_results(meetings, all_participants)
+    else:
+        messagebox.showinfo(&#34;Info&#34;, &#34;No meetings were found! The interval is invalid!&#34;)</code></pre>
+</details>
+</dd>
+<dt id="gui.search_meeting.search_meeting_screen"><code class="name flex">
+<span>def <span class="ident">search_meeting_screen</span></span>(<span>root)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Shows the search meeting screen </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>root</code></strong> :&ensp;<code>Tk</code></dt>
+<dd>The root window</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def search_meeting_screen(root):
+    &#34;&#34;&#34;
+    Shows the search meeting screen \n
+    Parameters
+    ----------
+    root: Tk
+        The root window
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    for widget in root.winfo_children():
+        widget.pack_forget()
+
+    def back_btn_func():
+        &#34;&#34;&#34;
+        Returns to the main menu \n
+        Returns
+        -------
+
+        &#34;&#34;&#34;
+        from gui.main_menu import redraw
+        redraw(root)
+
+    background(root)
+
+    back_frame = tk.Frame(root)
+    back_frame.place(relx=0, rely=0, anchor=&#34;nw&#34;, width=60, height=30)
+    back_button = tk.Button(back_frame, text=&#34;\u2190 Back&#34;, command=back_btn_func, bg=&#34;#FF3333&#34;,
+                            activebackground=&#34;#CC0000&#34;, fg=&#34;white&#34;,
+                            font=(&#34;Arial&#34;, 10))
+    back_button.pack(fill=&#34;both&#34;, expand=True, padx=1, pady=1)
+
+    meeting_frame = tk.Frame(root, bg=&#34;white&#34;, borderwidth=1, relief=&#34;solid&#34;)
+    meeting_frame.place(relx=0.5, rely=0.5, anchor=&#34;center&#34;, relwidth=0.7, relheight=0.5)
+
+    start_date_label = ttk.Label(meeting_frame, text=&#34; Start Date:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                                 borderwidth=1, relief=&#34;solid&#34;)
+    start_date_label.grid(row=0, column=0, padx=10, pady=5, sticky=&#34;w&#34;)
+    start_date_entry = DateEntry(meeting_frame, font=(&#34;Arial&#34;, 12), background=&#39;darkblue&#39;, foreground=&#39;white&#39;,
+                                 borderwidth=2, date_pattern=&#39;dd/mm/yyyy&#39;)
+    start_date_entry.grid(row=0, column=1, padx=10, pady=5)
+    start_date_entry.bind(&#34;&lt;Key&gt;&#34;, disable_edit)
+
+    date_label = ttk.Label(meeting_frame, text=&#34;End Date:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12), borderwidth=1,
+                           relief=&#34;solid&#34;)
+    date_label.grid(row=1, column=0, padx=10, pady=5, sticky=&#34;w&#34;)
+    date_entry = DateEntry(meeting_frame, font=(&#34;Arial&#34;, 12), background=&#39;darkblue&#39;, foreground=&#39;white&#39;, borderwidth=2,
+                           date_pattern=&#39;dd/mm/yyyy&#39;)
+    date_entry.grid(row=1, column=1, padx=10, pady=5)
+    date_entry.bind(&#34;&lt;Key&gt;&#34;, disable_edit)
+
+    hours = [str(i).zfill(2) for i in range(24)]
+    minutes = [str(i).zfill(2) for i in range(60)]
+
+    start_time_label = ttk.Label(meeting_frame, text=&#34;Start Time:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12),
+                                 borderwidth=1, relief=&#34;solid&#34;)
+    start_time_label.grid(row=2, column=0, padx=10, pady=5, sticky=&#34;e&#34;)
+
+    start_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    start_hour_combo.grid(row=2, column=1, padx=5, pady=5)
+    start_hour_combo.set(&#34;00&#34;)
+
+    start_minute_label = ttk.Label(meeting_frame, text=&#34;:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12))
+    start_minute_label.grid(row=2, column=2, padx=5, pady=5)
+
+    start_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    start_minute_combo.grid(row=2, column=3, padx=5, pady=5)
+    start_minute_combo.set(&#34;00&#34;)
+
+    end_time_label = ttk.Label(meeting_frame, text=&#34;End Time:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12), borderwidth=1,
+                               relief=&#34;solid&#34;)
+    end_time_label.grid(row=3, column=0, padx=10, pady=5, sticky=&#34;e&#34;)
+
+    end_hour_combo = ttk.Combobox(meeting_frame, values=hours, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    end_hour_combo.grid(row=3, column=1, padx=5, pady=5)
+    end_hour_combo.set(&#34;00&#34;)
+
+    end_minute_label = ttk.Label(meeting_frame, text=&#34;:&#34;, background=&#34;white&#34;, font=(&#34;Arial&#34;, 12))
+    end_minute_label.grid(row=3, column=2, padx=5, pady=5)
+
+    end_minute_combo = ttk.Combobox(meeting_frame, values=minutes, font=(&#34;Arial&#34;, 12), width=5, state=&#39;readonly&#39;)
+    end_minute_combo.grid(row=3, column=3, padx=5, pady=5)
+    end_minute_combo.set(&#34;00&#34;)
+
+    search_button = ttk.Button(meeting_frame, text=&#34;Search&#34;,
+                               command=lambda: search(start_date_entry, date_entry, start_hour_combo,
+                                                      start_minute_combo, end_hour_combo,
+                                                      end_minute_combo),
+                               style=&#39;Button.TButton&#39;)
+    search_button.grid(row=5, columnspan=3, pady=20)
+
+    style = ttk.Style()
+    style.theme_use(&#34;alt&#34;)
+    style.configure(&#34;Button.TButton&#34;, foreground=&#34;white&#34;, background=&#34;#66CC66&#34;, font=(&#34;Arial&#34;, 12))
+    style.map(&#34;TButton&#34;, background=[(&#34;active&#34;, &#34;purple&#34;)])</code></pre>
+</details>
+</dd>
+<dt id="gui.search_meeting.show_search_results"><code class="name flex">
+<span>def <span class="ident">show_search_results</span></span>(<span>rows, participants)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Shows the search results in a new window
+Parameters</p>
+<hr>
+<dl>
+<dt><strong><code>rows</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of tuples containing the meeting information</dd>
+<dt><strong><code>participants</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of lists containing the participants of each meeting</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_search_results(rows, participants):
+    &#34;&#34;&#34;
+    Shows the search results in a new window
+    Parameters
+    ----------
+    rows: list
+        A list of tuples containing the meeting information
+    participants: list
+        A list of lists containing the participants of each meeting
+    Returns
+    -------
+    None
+    &#34;&#34;&#34;
+    result_window = tk.Toplevel()
+    result_window.title(&#34;Meeting Search Results&#34;)
+
+    result_text = tk.Text(result_window, height=20, width=50)
+    result_text.tag_configure(&#34;bold&#34;, font=(&#34;Arial&#34;, 10, &#34;bold&#34;))
+    result_text.tag_configure(&#34;red&#34;, foreground=&#34;red&#34;)
+    result_text.tag_configure(&#34;green&#34;, foreground=&#34;green&#34;)
+    result_text.tag_configure(&#34;blue&#34;, foreground=&#34;blue&#34;)
+    result_text.tag_configure(&#34;orange&#34;, foreground=&#34;orange&#34;)
+    result_text.pack()
+
+    meetings = []
+    for i in range(len(rows)):
+        result_text.insert(tk.END, &#34;Meeting ID: &#34;, &#34;red&#34;)
+        result_text.insert(tk.END, f&#34;{rows[i][0]}\n&#34;)
+        result_text.insert(tk.END, &#34;Meeting name: &#34;, &#34;orange&#34;)
+        result_text.insert(tk.END, f&#34;{rows[i][3]}\n&#34;)
+        result_text.insert(tk.END, &#34;Start time: &#34;, &#34;blue&#34;)
+        result_text.insert(tk.END, f&#34;{rows[i][1]}\n&#34;)
+        result_text.insert(tk.END, &#34;End time: &#34;, &#34;blue&#34;)
+        result_text.insert(tk.END, f&#34;{rows[i][2]}\n&#34;)
+        result_text.insert(tk.END, &#34;Participants:\n&#34;, &#34;green&#34;)
+        for participant in participants[i]:
+            result_text.insert(tk.END, f&#34;{participant[1]} {participant[2]}\n&#34;)
+        meetings.append((rows[i][0], rows[i][1], rows[i][2], rows[i][3], participants[i]))
+    result_text.config(state=tk.DISABLED)
+    result_text.pack(fill=&#34;both&#34;, expand=True)
+
+    export_button = tk.Button(result_window, text=&#34;Export&#34;, command=lambda: export(False, meetings), bg=&#34;#FF9999&#34;,
+                              fg=&#34;white&#34;,
+                              font=(&#34;Arial&#34;, 12, &#34;bold&#34;))
+    export_button.pack()</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="gui" href="index.html">gui</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="gui.search_meeting.background" href="#gui.search_meeting.background">background</a></code></li>
+<li><code><a title="gui.search_meeting.disable_edit" href="#gui.search_meeting.disable_edit">disable_edit</a></code></li>
+<li><code><a title="gui.search_meeting.search" href="#gui.search_meeting.search">search</a></code></li>
+<li><code><a title="gui.search_meeting.search_meeting_screen" href="#gui.search_meeting.search_meeting_screen">search_meeting_screen</a></code></li>
+<li><code><a title="gui.search_meeting.show_search_results" href="#gui.search_meeting.show_search_results">show_search_results</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

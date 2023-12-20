@@ -15,8 +15,13 @@ participant_window_open = False
 def background(root):
     """
     Sets the background image of the given root window.
-    :param root:
-    :return:
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
     """
     global background_image
     width = root.winfo_screenwidth()
@@ -32,14 +37,25 @@ def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_co
              name_entry):
     """
     Gets the data from the fields of the add meeting screen
-    :param start_date_entry: Entry field for the start date
-    :param end_date_entry: Entry field for the end date
-    :param start_hour_combo: Combobox for the start hour
-    :param start_minute_combo: Combobox for the start minute
-    :param end_hour_combo: Combobox for the end hour
-    :param end_minute_combo: Combobox for the end minute
-    :param name_entry: Entry field for the name of the meeting
-    :return:
+    Parameters
+    ----------
+    start_date_entry : DateEntry
+        The entry field for the start date
+    end_date_entry : DateEntry
+        The entry field for the end date
+    start_hour_combo : Combobox
+        The combobox for the start hour
+    start_minute_combo : tk.Combobox
+        The combobox for the start minute
+    end_hour_combo : tk.Combobox
+        The combobox for the end hour
+    end_minute_combo : tk.Combobox
+        The combobox for the end minute
+    name_entry : tk.Entry
+        The entry field for the name
+    Returns
+    -------
+    None
     """
     global participant_window_open
     start_date = start_date_entry.get_date()
@@ -67,9 +83,14 @@ def get_data(start_date_entry, end_date_entry, start_hour_combo, start_minute_co
 
 def add_meeting_screen(root):
     """
-    Shows the add meeting screen.
-    :param root:
-    :return:
+    Shows the add meeting screen \n
+    Parameters
+    ----------
+    root : tk.Tk
+        The root window
+    Returns
+    -------
+    None
     """
     for widget in root.winfo_children():
         widget.pack_forget()
@@ -160,20 +181,42 @@ def add_meeting_screen(root):
 
 
 def disable_edit(event):
+    """
+    Disables the editing of the date entry fields \n
+    Parameters
+    ----------
+    event : tk.Event
+        The event that triggered the function
+    Returns
+    -------
+    str
+        "break"
+    """
     return "break"
 
 
 def open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name):
     """
-    Opens the window where the user can select the participants of the meeting
-    :param start_date:
-    :param end_date:
-    :param start_hour:
-    :param start_minute:
-    :param end_hour:
-    :param end_minute:
-    :param name:
-    :return:
+    Opens the window where the user can select the participants of the meeting \n
+    Parameters
+    ----------
+    start_date : datetime.datetime
+        The start date of the meeting
+    end_date : datetime.datetime
+        The end date of the meeting
+    start_hour : str
+        The start hour of the meeting
+    start_minute : str
+        The start minute of the meeting
+    end_hour : str
+        The end hour of the meeting
+    end_minute : str
+        The end minute of the meeting
+    name : str
+        The name of the meeting
+    Returns
+    -------
+    None
     """
 
     db_manager = DatabaseManager()
@@ -194,6 +237,12 @@ def open_choose_participants(start_date, end_date, start_hour, start_minute, end
     selected_participants = []
 
     def save_selected():
+        """
+        Saves the selected participants and sends the data to the database \n
+        Returns
+        -------
+        None
+        """
         global participant_window_open
         if len(selected_participants) == 0:
             messagebox.showerror("Error", "You must select at least one participant!")
@@ -239,16 +288,30 @@ def open_choose_participants(start_date, end_date, start_hour, start_minute, end
 
 def send_data(start_date, end_date, start_hour, start_minute, end_hour, end_minute, selected_participants, name):
     """
-    Sends the data to the database
-    :param start_date:
-    :param end_date:
-    :param start_hour:
-    :param start_minute:
-    :param end_hour:
-    :param end_minute:
-    :param selected_participants:
-    :param name:
-    :return:
+    Sends the data to the database \n
+    Parameters
+    ----------
+    start_date : datetime.datetime
+        The start date of the meeting
+    end_date : datetime.datetime
+        The end date of the meeting
+    start_hour : str
+        The start hour of the meeting
+    start_minute : str
+        The start minute of the meeting
+    end_hour : str
+        The end hour of the meeting
+    end_minute : str
+        The end minute of the meeting
+    selected_participants : list
+        The list of the selected participants
+    name : str
+        The name of the meeting
+    Returns
+    -------
+    None
+
+
     """
     db_manager = DatabaseManager()
     start_hour = int(start_hour)

@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from tkinter import messagebox
 
 from icalendar import Calendar, Event
 
@@ -8,10 +9,36 @@ from database.manager import DatabaseManager
 
 def export(all_meetings, meetings=None):
     """
-    Exports the meetings to a .ics file
-    :param all_meetings: True if all meetings should be exported, False if only the given meetings should be exported
-    :param meetings: the meetings to be exported, None if all meetings should be exported
-    :return:
+    Exports the meetings to a .ics file and shows a message box with the result \n
+    Parameters
+    ----------
+    all_meetings: bool
+        True if all meetings should be exported, False if only the given meetings should be exported
+    meetings: list
+        The meetings to be exported, None if all meetings should be exported
+    Returns
+    -------
+    None
+    """
+    if export_file(all_meetings, meetings)[0]:
+        messagebox.showinfo("Info", "The meetings were exported successfully!")
+    else:
+        messagebox.showerror("Error", "An error occurred while exporting the meetings!")
+
+
+def export_file(all_meetings, meetings=None):
+    """
+    Exports the meetings to a .ics file \n
+    Parameters
+    ----------
+    all_meetings: bool
+        True if all meetings should be exported, False if only the given meetings should be exported
+    meetings: list
+        The meetings to be exported, None if all meetings should be exported
+    Returns
+    -------
+    tuple
+        The first element is True if the meetings were exported successfully, False otherwise
     """
     cal = Calendar()
     cal.add("prodid", "Meeting Scheduler")
@@ -62,18 +89,27 @@ def export(all_meetings, meetings=None):
                 tz_end = end_timezone.tzname(end_time)
                 event.add('TZID', tz)
                 participants_info = "Participants:\n" + "\n".join(
-                    [f"{participant[1]} {participant[2]}" for participant in meeting[3]])
+                    [f"{participant[1]} {participant[2]}" for participant in meeting[4]])
                 event.add("DESCRIPTION", participants_info)
-                for participant in meeting[3]:
+                for participant in meeting[4]:
                     full_name = f"{participant[1]} {participant[2]}"
                     event.add("ATTENDEE", f"CN={full_name}")
                 cal.add_component(event)
     uid = uuid.uuid4().hex
     if all_meetings:
         file_name = f"calendar_all_meetings_{uid}.ics"
-        with open(file_name, "wb") as file:
-            file.write(cal.to_ical())
+        try:
+            with open(file_name, "wb") as file:
+                file.write(cal.to_ical())
+            return True, None
+        except Exception as e:
+            return False, e
+
     else:
         file_name = f"calendar_meetings_{uid}.ics"
-        with open(file_name, "wb") as file:
-            file.write(cal.to_ical())
+        try:
+            with open(file_name, "wb") as file:
+                file.write(cal.to_ical())
+            return True, None
+        except Exception as e:
+            return False, e

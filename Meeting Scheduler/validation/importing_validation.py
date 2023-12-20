@@ -3,9 +3,16 @@ from datetime import timedelta
 
 def verify_event(event):
     """
-    Verifies if the given event is valid
-    :param event: The event to be verified.
-    :return: True if the event is valid, False otherwise.
+    Verifies if the given event is valid \n
+   Parameters
+    ----------
+    event: dict
+        The event to be verified
+    Returns
+    -------
+    bool
+        True if the event is valid, False otherwise
+
     """
     if not event.get("uid"):
         return False
@@ -16,16 +23,26 @@ def verify_event(event):
     if not event.get("end_time"):
         return False
     if not event.get("attendees") or (isinstance(event.get("attendees"), list) and all(
-            not attendee.strip() for attendee in event.get("attendees"))):
+            not attendee.strip() for attendee in event.get("attendees"))) or len(event.get("attendees")) == 0:
         return False
+    for attendee in event.get("attendees"):
+        if "CN=" not in attendee:
+            return False
     return True
 
 
 def verify_events(events):
     """
-    Verifies if the given events are valid
-    :param events: The events to be verified.
-    :return: True if the events are valid, False otherwise.
+    Verifies if the given events are valid \n
+    Parameters
+    ----------
+    events: list
+        The events to be verified
+    Returns
+    -------
+    tuple
+        The first element is True if the events are valid, False otherwise
+        The second element is None if the events are valid, an error message otherwise
     """
     for event in events:
         if not verify_event(event):
@@ -35,15 +52,28 @@ def verify_events(events):
 
 def validate_meeting_to_import(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name):
     """
-    Validates the fields of the meeting
-    :param start_date:
-    :param end_date:
-    :param start_hour:
-    :param start_minute:
-    :param end_hour:
-    :param end_minute:
-    :param name:
-    :return: (True, None) if the fields are valid, (False, error message) otherwise.
+    Validates the fields of the meeting \n
+    Parameters
+    ----------
+    start_date: DateEntry
+        The start date of the meeting
+    end_date: DateEntry
+        The end date of the meeting
+    start_hour: tk.Combobox
+        The start hour of the meeting
+    start_minute: tk.Combobox
+        The start minute of the meeting
+    end_hour: tk.Combobox
+        The end hour of the meeting
+    end_minute: tk.Combobox
+        The end minute of the meeting
+    name: Entry
+        The name of the meeting
+    Returns
+    -------
+    tuple
+        The first element is True if the meeting is valid, False otherwise
+        The second element is None if the meeting is valid, an error message otherwise
     """
     start_hour = int(start_hour)
     start_minute = int(start_minute)
@@ -77,10 +107,19 @@ def validate_meeting_to_import(start_date, end_date, start_hour, start_minute, e
 
 def validate_same_participants(participants_new, participants_old):
     """
-    Validates if the given participants are the same as the participants of the meeting from the database
-    :param participants_new: Participants for the meeting to be imported
-    :param participants_old: Participants of the meeting from the database
-    :return: False if exists at least one participant that is not the same, True otherwise.
+    Validates if the given participants are the same as the participants of the meeting from the database \n
+    Parameters
+    ----------
+     participants_new: list
+        The participants to be validated
+    participants_old: list
+        The participants of the meeting from the database
+    Returns
+    -------
+    tuple
+        (True, None) if the participants are the same, (True, "yes"/"no") if the participants are included or
+            include other participants,
+        (False, common_participants) if the participants are not the same and there are common participants
     """
     final = 0
     common_participants = []
@@ -95,7 +134,6 @@ def validate_same_participants(participants_new, participants_old):
                     break
         if no != 0:
             final += 1
-    print(len(participants_new), len(participants_old), final)
     if final == len(participants_new) and len(participants_new) == len(participants_old):
         return True, None
     elif final == len(participants_new):
@@ -107,10 +145,18 @@ def validate_same_participants(participants_new, participants_old):
 
 def meeting_at_same_time(event, existing_meetings):
     """
-    Checks if the given event overlaps with any of the existing meetings
-    :param event:
-    :param existing_meetings:
-    :return: the meetings that overlap with the given event if there are any
+    Checks if the given event overlaps with any of the existing meetings \n
+    Parameters
+    ----------
+    event: dict
+        The event to be validated
+    existing_meetings: list
+        The existing meetings
+    Returns
+    -------
+    list
+        The meetings that overlap with the given event
+
     """
     comm = []
     for meeting in existing_meetings:
@@ -127,10 +173,17 @@ def meeting_at_same_time(event, existing_meetings):
 
 def common_meetings_with_common_participants(event, existing_meetings):
     """
-    Checks if the given event overlaps with any of the existing meetings and if there are any common participants
-    :param event:
-    :param existing_meetings:
-    :return: the common participants if there are any, None otherwise.
+    Checks if the given event overlaps with any of the existing meetings and if there are any common participants \n
+    Parameters
+    ----------
+    event: dict
+        The event to be validated
+    existing_meetings: list
+        The existing meetings
+    Returns
+    -------
+    list
+        The common participants
     """
     common_meetings = meeting_at_same_time(event, existing_meetings)
     common_participants_with_other_meetings = []
@@ -148,9 +201,18 @@ def common_meetings_with_common_participants(event, existing_meetings):
 def validate_with_existing_meetings(event, db_manager):
     """
     Validates if the given events overlap with the existing meetings
-    :param event: The event to be validated
-    :param db_manager: DatabaseManager object
-    :return: None if the event is the same as an existing meeting or a list of overlapping meetings if there are an
+    Parameters
+    ----------
+    event: dict
+        The event to be validated
+    db_manager: DatabaseManager
+        The database manager
+    Returns
+    -------
+    tuple
+        (False, None) if the event is identical to an existing meeting,
+        (False, common_meetings) if the event overlaps with an existing with the same name, time and some participants,
+        (True, common_participants_with_meetings_common) if the event has common participants with an existing meeting
         """
     existing_meetings = db_manager.get_all_meetings_with_participants()
     name = event["name"]
