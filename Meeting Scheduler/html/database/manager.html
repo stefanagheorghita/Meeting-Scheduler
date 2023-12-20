@@ -369,7 +369,36 @@ class DatabaseManager:
             return True
         except psycopg2.Error as e:
             print(&#34;Error:&#34;, e)
-            return False</code></pre>
+            return False
+
+    def get_meetings_by_participant_id(self, id):
+        &#34;&#34;&#34;
+        Gets the meetings of a participant \n
+        Parameters
+        ----------
+        self : DatabaseManager
+            The object itself
+        id : int
+            The id of the participant
+        Returns
+        -------
+        list
+            A list of meetings of the participant
+        &#34;&#34;&#34;
+        try:
+            if not self.conn:
+                self.open_connection()
+            cursor = self.conn.cursor()
+            cursor.execute(&#34;SELECT meeting_id FROM meeting_participants WHERE person_id = %s&#34;, (id,))
+            rows = cursor.fetchall()
+            meetings = []
+            for row in rows:
+                cursor.execute(&#34;SELECT * FROM meeting WHERE id = %s&#34;, (row[0],))
+                meetings.append(cursor.fetchone())
+            return meetings
+        except psycopg2.Error as e:
+            print(&#34;Error:&#34;, e)
+            return None</code></pre>
 </details>
 </section>
 <section>
@@ -730,7 +759,36 @@ class DatabaseManager:
             return True
         except psycopg2.Error as e:
             print(&#34;Error:&#34;, e)
-            return False</code></pre>
+            return False
+
+    def get_meetings_by_participant_id(self, id):
+        &#34;&#34;&#34;
+        Gets the meetings of a participant \n
+        Parameters
+        ----------
+        self : DatabaseManager
+            The object itself
+        id : int
+            The id of the participant
+        Returns
+        -------
+        list
+            A list of meetings of the participant
+        &#34;&#34;&#34;
+        try:
+            if not self.conn:
+                self.open_connection()
+            cursor = self.conn.cursor()
+            cursor.execute(&#34;SELECT meeting_id FROM meeting_participants WHERE person_id = %s&#34;, (id,))
+            rows = cursor.fetchall()
+            meetings = []
+            for row in rows:
+                cursor.execute(&#34;SELECT * FROM meeting WHERE id = %s&#34;, (row[0],))
+                meetings.append(cursor.fetchone())
+            return meetings
+        except psycopg2.Error as e:
+            print(&#34;Error:&#34;, e)
+            return None</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -1030,6 +1088,57 @@ class DatabaseManager:
             participants = self.get_participants(rows[i][0])
             rows[i] = (rows[i], participants)
         return rows
+    except psycopg2.Error as e:
+        print(&#34;Error:&#34;, e)
+        return None</code></pre>
+</details>
+</dd>
+<dt id="database.manager.DatabaseManager.get_meetings_by_participant_id"><code class="name flex">
+<span>def <span class="ident">get_meetings_by_participant_id</span></span>(<span>self, id)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gets the meetings of a participant </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>self</code></strong> :&ensp;<code><a title="database.manager.DatabaseManager" href="#database.manager.DatabaseManager">DatabaseManager</a></code></dt>
+<dd>The object itself</dd>
+<dt><strong><code>id</code></strong> :&ensp;<code>int</code></dt>
+<dd>The id of the participant</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>A list of meetings of the participant</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_meetings_by_participant_id(self, id):
+    &#34;&#34;&#34;
+    Gets the meetings of a participant \n
+    Parameters
+    ----------
+    self : DatabaseManager
+        The object itself
+    id : int
+        The id of the participant
+    Returns
+    -------
+    list
+        A list of meetings of the participant
+    &#34;&#34;&#34;
+    try:
+        if not self.conn:
+            self.open_connection()
+        cursor = self.conn.cursor()
+        cursor.execute(&#34;SELECT meeting_id FROM meeting_participants WHERE person_id = %s&#34;, (id,))
+        rows = cursor.fetchall()
+        meetings = []
+        for row in rows:
+            cursor.execute(&#34;SELECT * FROM meeting WHERE id = %s&#34;, (row[0],))
+            meetings.append(cursor.fetchone())
+        return meetings
     except psycopg2.Error as e:
         print(&#34;Error:&#34;, e)
         return None</code></pre>
@@ -1365,6 +1474,7 @@ class DatabaseManager:
 <li><code><a title="database.manager.DatabaseManager.close_connection" href="#database.manager.DatabaseManager.close_connection">close_connection</a></code></li>
 <li><code><a title="database.manager.DatabaseManager.find_all_persons" href="#database.manager.DatabaseManager.find_all_persons">find_all_persons</a></code></li>
 <li><code><a title="database.manager.DatabaseManager.get_all_meetings_with_participants" href="#database.manager.DatabaseManager.get_all_meetings_with_participants">get_all_meetings_with_participants</a></code></li>
+<li><code><a title="database.manager.DatabaseManager.get_meetings_by_participant_id" href="#database.manager.DatabaseManager.get_meetings_by_participant_id">get_meetings_by_participant_id</a></code></li>
 <li><code><a title="database.manager.DatabaseManager.get_participants" href="#database.manager.DatabaseManager.get_participants">get_participants</a></code></li>
 <li><code><a title="database.manager.DatabaseManager.open_connection" href="#database.manager.DatabaseManager.open_connection">open_connection</a></code></li>
 <li><code><a title="database.manager.DatabaseManager.search_id_db" href="#database.manager.DatabaseManager.search_id_db">search_id_db</a></code></li>

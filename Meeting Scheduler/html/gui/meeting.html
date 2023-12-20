@@ -223,6 +223,50 @@ def disable_edit(event):
     return &#34;break&#34;
 
 
+def has_a_meeting(participant_id, start_date, end_date, start_hour, start_minute, end_hour, end_minute):
+    &#34;&#34;&#34;
+    Checks if the participant has a meeting in the given time interval \n
+    Parameters
+    ----------
+    participant_id : int
+        The id of the participant
+    start_date : datetime.datetime
+        The start date of the meeting
+    end_date : datetime.datetime
+        The end date of the meeting
+    start_hour : str
+        The start hour of the meeting
+    start_minute : str
+        The start minute of the meeting
+    end_hour : str
+        The end hour of the meeting
+    end_minute : str
+        The end minute of the meeting
+    Returns
+    -------
+    bool
+        True if the participant has a meeting in the given time interval, False otherwise
+    &#34;&#34;&#34;
+    db_manager = DatabaseManager()
+    start_time = datetime.combine(start_date, time(int(start_hour), int(start_minute)))
+    end_time = datetime.combine(end_date, time(int(end_hour), int(end_minute)))
+    meetings = db_manager.get_meetings_by_participant_id(participant_id)
+    if meetings is None:
+        return False
+    for meeting in meetings:
+        start_time_meet = meeting[1].replace(tzinfo=None)
+        end_time_meet = meeting[2].replace(tzinfo=None)
+        if start_time_meet &lt;= start_time &lt; end_time_meet:
+            return True
+        elif start_time_meet &lt;= end_time &lt; end_time_meet:
+            return True
+        elif start_time &lt;= start_time_meet &lt; end_time:
+            return True
+        elif start_time &lt;= end_time_meet &lt; end_time:
+            return True
+    return False
+
+
 def open_choose_participants(start_date, end_date, start_hour, start_minute, end_hour, end_minute, name):
     &#34;&#34;&#34;
     Opens the window where the user can select the participants of the meeting \n
@@ -303,12 +347,27 @@ def open_choose_participants(start_date, end_date, start_hour, start_minute, end
         checkbox_vars.append(var)
 
         def on_checkbox_click(participant=participant, var=var):
+            &#34;&#34;&#34;
+            Adds or removes the participant from the selected participants list \n
+            Parameters
+            ----------
+            participant : tuple
+                The participant
+            var : tk.BooleanVar
+                The variable of the checkbox
+            Returns
+            -------
+            None
+            &#34;&#34;&#34;
             if var.get() and participant not in selected_participants:
                 selected_participants.append(participant)
             elif not var.get() and participant in selected_participants:
                 selected_participants.remove(participant)
 
-        text = f&#34;{participant[0]} - {participant[1]} {participant[2]}&#34;
+        if has_a_meeting(participant[0], start_date, end_date, start_hour, start_minute, end_hour, end_minute):
+            text = f&#34;⚠️{participant[0]} - {participant[1]} {participant[2]}&#34;
+        else:
+            text = f&#34;{participant[0]} - {participant[1]} {participant[2]}&#34;
         checkbox = tk.Checkbutton(participants_frame, text=text, variable=var,
                                   command=on_checkbox_click, font=(&#34;Arial&#34;, 12))
         checkbox.pack(anchor=tk.W)
@@ -636,6 +695,81 @@ Parameters</p>
         messagebox.showerror(&#34;Error&#34;, msg)</code></pre>
 </details>
 </dd>
+<dt id="gui.meeting.has_a_meeting"><code class="name flex">
+<span>def <span class="ident">has_a_meeting</span></span>(<span>participant_id, start_date, end_date, start_hour, start_minute, end_hour, end_minute)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if the participant has a meeting in the given time interval </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>participant_id</code></strong> :&ensp;<code>int</code></dt>
+<dd>The id of the participant</dd>
+<dt><strong><code>start_date</code></strong> :&ensp;<code>datetime.datetime</code></dt>
+<dd>The start date of the meeting</dd>
+<dt><strong><code>end_date</code></strong> :&ensp;<code>datetime.datetime</code></dt>
+<dd>The end date of the meeting</dd>
+<dt><strong><code>start_hour</code></strong> :&ensp;<code>str</code></dt>
+<dd>The start hour of the meeting</dd>
+<dt><strong><code>start_minute</code></strong> :&ensp;<code>str</code></dt>
+<dd>The start minute of the meeting</dd>
+<dt><strong><code>end_hour</code></strong> :&ensp;<code>str</code></dt>
+<dd>The end hour of the meeting</dd>
+<dt><strong><code>end_minute</code></strong> :&ensp;<code>str</code></dt>
+<dd>The end minute of the meeting</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True if the participant has a meeting in the given time interval, False otherwise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def has_a_meeting(participant_id, start_date, end_date, start_hour, start_minute, end_hour, end_minute):
+    &#34;&#34;&#34;
+    Checks if the participant has a meeting in the given time interval \n
+    Parameters
+    ----------
+    participant_id : int
+        The id of the participant
+    start_date : datetime.datetime
+        The start date of the meeting
+    end_date : datetime.datetime
+        The end date of the meeting
+    start_hour : str
+        The start hour of the meeting
+    start_minute : str
+        The start minute of the meeting
+    end_hour : str
+        The end hour of the meeting
+    end_minute : str
+        The end minute of the meeting
+    Returns
+    -------
+    bool
+        True if the participant has a meeting in the given time interval, False otherwise
+    &#34;&#34;&#34;
+    db_manager = DatabaseManager()
+    start_time = datetime.combine(start_date, time(int(start_hour), int(start_minute)))
+    end_time = datetime.combine(end_date, time(int(end_hour), int(end_minute)))
+    meetings = db_manager.get_meetings_by_participant_id(participant_id)
+    if meetings is None:
+        return False
+    for meeting in meetings:
+        start_time_meet = meeting[1].replace(tzinfo=None)
+        end_time_meet = meeting[2].replace(tzinfo=None)
+        if start_time_meet &lt;= start_time &lt; end_time_meet:
+            return True
+        elif start_time_meet &lt;= end_time &lt; end_time_meet:
+            return True
+        elif start_time &lt;= start_time_meet &lt; end_time:
+            return True
+        elif start_time &lt;= end_time_meet &lt; end_time:
+            return True
+    return False</code></pre>
+</details>
+</dd>
 <dt id="gui.meeting.open_choose_participants"><code class="name flex">
 <span>def <span class="ident">open_choose_participants</span></span>(<span>start_date, end_date, start_hour, start_minute, end_hour, end_minute, name)</span>
 </code></dt>
@@ -747,12 +881,27 @@ Parameters</p>
         checkbox_vars.append(var)
 
         def on_checkbox_click(participant=participant, var=var):
+            &#34;&#34;&#34;
+            Adds or removes the participant from the selected participants list \n
+            Parameters
+            ----------
+            participant : tuple
+                The participant
+            var : tk.BooleanVar
+                The variable of the checkbox
+            Returns
+            -------
+            None
+            &#34;&#34;&#34;
             if var.get() and participant not in selected_participants:
                 selected_participants.append(participant)
             elif not var.get() and participant in selected_participants:
                 selected_participants.remove(participant)
 
-        text = f&#34;{participant[0]} - {participant[1]} {participant[2]}&#34;
+        if has_a_meeting(participant[0], start_date, end_date, start_hour, start_minute, end_hour, end_minute):
+            text = f&#34;⚠️{participant[0]} - {participant[1]} {participant[2]}&#34;
+        else:
+            text = f&#34;{participant[0]} - {participant[1]} {participant[2]}&#34;
         checkbox = tk.Checkbutton(participants_frame, text=text, variable=var,
                                   command=on_checkbox_click, font=(&#34;Arial&#34;, 12))
         checkbox.pack(anchor=tk.W)</code></pre>
@@ -855,6 +1004,7 @@ Parameters</p>
 <li><code><a title="gui.meeting.background" href="#gui.meeting.background">background</a></code></li>
 <li><code><a title="gui.meeting.disable_edit" href="#gui.meeting.disable_edit">disable_edit</a></code></li>
 <li><code><a title="gui.meeting.get_data" href="#gui.meeting.get_data">get_data</a></code></li>
+<li><code><a title="gui.meeting.has_a_meeting" href="#gui.meeting.has_a_meeting">has_a_meeting</a></code></li>
 <li><code><a title="gui.meeting.open_choose_participants" href="#gui.meeting.open_choose_participants">open_choose_participants</a></code></li>
 <li><code><a title="gui.meeting.send_data" href="#gui.meeting.send_data">send_data</a></code></li>
 </ul>

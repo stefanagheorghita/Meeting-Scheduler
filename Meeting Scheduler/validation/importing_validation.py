@@ -55,19 +55,19 @@ def validate_meeting_to_import(start_date, end_date, start_hour, start_minute, e
     Validates the fields of the meeting \n
     Parameters
     ----------
-    start_date: DateEntry
+    start_date: date
         The start date of the meeting
-    end_date: DateEntry
+    end_date: date
         The end date of the meeting
-    start_hour: tk.Combobox
+    start_hour: int
         The start hour of the meeting
-    start_minute: tk.Combobox
+    start_minute: int
         The start minute of the meeting
-    end_hour: tk.Combobox
+    end_hour: int
         The end hour of the meeting
-    end_minute: tk.Combobox
+    end_minute: int
         The end minute of the meeting
-    name: Entry
+    name: str
         The name of the meeting
     Returns
     -------
@@ -160,13 +160,13 @@ def meeting_at_same_time(event, existing_meetings):
     """
     comm = []
     for meeting in existing_meetings:
-        if meeting[0][1] <= event["start_time"] <= meeting[0][2]:
+        if meeting[0][1] <= event["start_time"] < meeting[0][2]:
             comm.append(meeting)
-        elif meeting[0][1] <= event["end_time"] <= meeting[0][2]:
+        elif meeting[0][1] <= event["end_time"] < meeting[0][2]:
             comm.append(meeting)
-        elif event["start_time"] <= meeting[0][1] <= event["end_time"]:
+        elif event["start_time"] <= meeting[0][1] < event["end_time"]:
             comm.append(meeting)
-        elif event["start_time"] <= meeting[0][2] <= event["end_time"]:
+        elif event["start_time"] <= meeting[0][2] < event["end_time"]:
             comm.append(meeting)
     return comm
 

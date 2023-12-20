@@ -41,7 +41,6 @@ def transform(events):
             parts = attendee.split(";")
             name_part = parts[0]
             name = name_part.split("=")[-1]
-            print(name)
             last_name = name.split(" ")[-1]
             first_name = " ".join(name.split(" ")[:-1])
             if len(parts) == 1 or parts[1] == "" or not parts[1].startswith("X-ID"):
@@ -83,10 +82,11 @@ def add_not_existing_people(participants, all_people, db_manager):
     Returns
     -------
     list
+        The new list of participants
     """
     added_people = []
     for participant in participants:
-        print(participant)
+        all_people = db_manager.find_all_persons()
         sorted_ids = sorted([person[0] for person in all_people])
         id = 0
         num = 1

@@ -24,6 +24,10 @@ def validate_meeting_search(start_date, end_date, start_hour, start_minute, end_
         The first element is True if the meeting is valid, False otherwise
         The second element is None if the meeting is valid, an error message otherwise
     """
+    start_hour = int(start_hour)
+    start_minute = int(start_minute)
+    end_hour = int(end_hour)
+    end_minute = int(end_minute)
     if end_date < start_date:
         return False, "The start date must be before the end date!"
     elif end_date == start_date:

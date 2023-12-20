@@ -153,10 +153,10 @@ def add_person_validation(id, first_name, last_name):
         if first_name_formatted[0] != first_name[0] or last_name_formatted[0] != last_name[0]:
             message = &#34;The person was added to the database as &#34; + first_name_formatted + &#34; &#34; + last_name_formatted + \
                       &#34;!&#34;
-        first_name = first_name_formatted
-        last_name = last_name_formatted
-        if not db_manager.add_person(id, first_name, last_name):
-            return False, &#34;An error occurred while adding the person to the database!&#34;
+            first_name = first_name_formatted
+            last_name = last_name_formatted
+            if not db_manager.add_person(id, first_name, last_name):
+                return False, &#34;An error occurred while adding the person to the database!&#34;
     if message is None:
         if not db_manager.add_person(id, first_name, last_name):
             return False, &#34;An error occurred while adding the person to the database!&#34;
@@ -311,10 +311,10 @@ The second element is None if the person was added successfully, an error messag
         if first_name_formatted[0] != first_name[0] or last_name_formatted[0] != last_name[0]:
             message = &#34;The person was added to the database as &#34; + first_name_formatted + &#34; &#34; + last_name_formatted + \
                       &#34;!&#34;
-        first_name = first_name_formatted
-        last_name = last_name_formatted
-        if not db_manager.add_person(id, first_name, last_name):
-            return False, &#34;An error occurred while adding the person to the database!&#34;
+            first_name = first_name_formatted
+            last_name = last_name_formatted
+            if not db_manager.add_person(id, first_name, last_name):
+                return False, &#34;An error occurred while adding the person to the database!&#34;
     if message is None:
         if not db_manager.add_person(id, first_name, last_name):
             return False, &#34;An error occurred while adding the person to the database!&#34;

@@ -83,19 +83,19 @@ def validate_meeting_to_import(start_date, end_date, start_hour, start_minute, e
     Validates the fields of the meeting \n
     Parameters
     ----------
-    start_date: DateEntry
+    start_date: date
         The start date of the meeting
-    end_date: DateEntry
+    end_date: date
         The end date of the meeting
-    start_hour: tk.Combobox
+    start_hour: int
         The start hour of the meeting
-    start_minute: tk.Combobox
+    start_minute: int
         The start minute of the meeting
-    end_hour: tk.Combobox
+    end_hour: int
         The end hour of the meeting
-    end_minute: tk.Combobox
+    end_minute: int
         The end minute of the meeting
-    name: Entry
+    name: str
         The name of the meeting
     Returns
     -------
@@ -188,13 +188,13 @@ def meeting_at_same_time(event, existing_meetings):
     &#34;&#34;&#34;
     comm = []
     for meeting in existing_meetings:
-        if meeting[0][1] &lt;= event[&#34;start_time&#34;] &lt;= meeting[0][2]:
+        if meeting[0][1] &lt;= event[&#34;start_time&#34;] &lt; meeting[0][2]:
             comm.append(meeting)
-        elif meeting[0][1] &lt;= event[&#34;end_time&#34;] &lt;= meeting[0][2]:
+        elif meeting[0][1] &lt;= event[&#34;end_time&#34;] &lt; meeting[0][2]:
             comm.append(meeting)
-        elif event[&#34;start_time&#34;] &lt;= meeting[0][1] &lt;= event[&#34;end_time&#34;]:
+        elif event[&#34;start_time&#34;] &lt;= meeting[0][1] &lt; event[&#34;end_time&#34;]:
             comm.append(meeting)
-        elif event[&#34;start_time&#34;] &lt;= meeting[0][2] &lt;= event[&#34;end_time&#34;]:
+        elif event[&#34;start_time&#34;] &lt;= meeting[0][2] &lt; event[&#34;end_time&#34;]:
             comm.append(meeting)
     return comm
 
@@ -354,13 +354,13 @@ def validate_with_existing_meetings(event, db_manager):
     &#34;&#34;&#34;
     comm = []
     for meeting in existing_meetings:
-        if meeting[0][1] &lt;= event[&#34;start_time&#34;] &lt;= meeting[0][2]:
+        if meeting[0][1] &lt;= event[&#34;start_time&#34;] &lt; meeting[0][2]:
             comm.append(meeting)
-        elif meeting[0][1] &lt;= event[&#34;end_time&#34;] &lt;= meeting[0][2]:
+        elif meeting[0][1] &lt;= event[&#34;end_time&#34;] &lt; meeting[0][2]:
             comm.append(meeting)
-        elif event[&#34;start_time&#34;] &lt;= meeting[0][1] &lt;= event[&#34;end_time&#34;]:
+        elif event[&#34;start_time&#34;] &lt;= meeting[0][1] &lt; event[&#34;end_time&#34;]:
             comm.append(meeting)
-        elif event[&#34;start_time&#34;] &lt;= meeting[0][2] &lt;= event[&#34;end_time&#34;]:
+        elif event[&#34;start_time&#34;] &lt;= meeting[0][2] &lt; event[&#34;end_time&#34;]:
             comm.append(meeting)
     return comm</code></pre>
 </details>
@@ -372,19 +372,19 @@ def validate_with_existing_meetings(event, db_manager):
 <div class="desc"><p>Validates the fields of the meeting </p>
 <h2 id="parameters">Parameters</h2>
 <dl>
-<dt><strong><code>start_date</code></strong> :&ensp;<code>DateEntry</code></dt>
+<dt><strong><code>start_date</code></strong> :&ensp;<code>date</code></dt>
 <dd>The start date of the meeting</dd>
-<dt><strong><code>end_date</code></strong> :&ensp;<code>DateEntry</code></dt>
+<dt><strong><code>end_date</code></strong> :&ensp;<code>date</code></dt>
 <dd>The end date of the meeting</dd>
-<dt><strong><code>start_hour</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dt><strong><code>start_hour</code></strong> :&ensp;<code>int</code></dt>
 <dd>The start hour of the meeting</dd>
-<dt><strong><code>start_minute</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dt><strong><code>start_minute</code></strong> :&ensp;<code>int</code></dt>
 <dd>The start minute of the meeting</dd>
-<dt><strong><code>end_hour</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dt><strong><code>end_hour</code></strong> :&ensp;<code>int</code></dt>
 <dd>The end hour of the meeting</dd>
-<dt><strong><code>end_minute</code></strong> :&ensp;<code>tk.Combobox</code></dt>
+<dt><strong><code>end_minute</code></strong> :&ensp;<code>int</code></dt>
 <dd>The end minute of the meeting</dd>
-<dt><strong><code>name</code></strong> :&ensp;<code>Entry</code></dt>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
 <dd>The name of the meeting</dd>
 </dl>
 <h2 id="returns">Returns</h2>
@@ -402,19 +402,19 @@ The second element is None if the meeting is valid, an error message otherwise</
     Validates the fields of the meeting \n
     Parameters
     ----------
-    start_date: DateEntry
+    start_date: date
         The start date of the meeting
-    end_date: DateEntry
+    end_date: date
         The end date of the meeting
-    start_hour: tk.Combobox
+    start_hour: int
         The start hour of the meeting
-    start_minute: tk.Combobox
+    start_minute: int
         The start minute of the meeting
-    end_hour: tk.Combobox
+    end_hour: int
         The end hour of the meeting
-    end_minute: tk.Combobox
+    end_minute: int
         The end minute of the meeting
-    name: Entry
+    name: str
         The name of the meeting
     Returns
     -------

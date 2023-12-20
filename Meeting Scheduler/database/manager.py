@@ -342,3 +342,32 @@ class DatabaseManager:
         except psycopg2.Error as e:
             print("Error:", e)
             return False
+
+    def get_meetings_by_participant_id(self, id):
+        """
+        Gets the meetings of a participant \n
+        Parameters
+        ----------
+        self : DatabaseManager
+            The object itself
+        id : int
+            The id of the participant
+        Returns
+        -------
+        list
+            A list of meetings of the participant
+        """
+        try:
+            if not self.conn:
+                self.open_connection()
+            cursor = self.conn.cursor()
+            cursor.execute("SELECT meeting_id FROM meeting_participants WHERE person_id = %s", (id,))
+            rows = cursor.fetchall()
+            meetings = []
+            for row in rows:
+                cursor.execute("SELECT * FROM meeting WHERE id = %s", (row[0],))
+                meetings.append(cursor.fetchone())
+            return meetings
+        except psycopg2.Error as e:
+            print("Error:", e)
+            return None

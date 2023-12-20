@@ -125,10 +125,10 @@ def add_person_validation(id, first_name, last_name):
         if first_name_formatted[0] != first_name[0] or last_name_formatted[0] != last_name[0]:
             message = "The person was added to the database as " + first_name_formatted + " " + last_name_formatted + \
                       "!"
-        first_name = first_name_formatted
-        last_name = last_name_formatted
-        if not db_manager.add_person(id, first_name, last_name):
-            return False, "An error occurred while adding the person to the database!"
+            first_name = first_name_formatted
+            last_name = last_name_formatted
+            if not db_manager.add_person(id, first_name, last_name):
+                return False, "An error occurred while adding the person to the database!"
     if message is None:
         if not db_manager.add_person(id, first_name, last_name):
             return False, "An error occurred while adding the person to the database!"
